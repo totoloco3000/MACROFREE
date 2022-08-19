@@ -81,7 +81,7 @@ body{
     overflow: hidden;
     z-index: 9999999;
     position: relative;
-    max-height: 402px;
+    max-height: 400px;
 }
 
 .login-header{
