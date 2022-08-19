@@ -61,6 +61,7 @@ body{
     position: absolute;
     top: 0px;
     z-index: -1;
+    height: 95%;
 }
 
 #login-box{
@@ -80,6 +81,7 @@ body{
     overflow: hidden;
     z-index: 9999999;
     position: relative;
+    max-height: 402px;
 }
 
 .login-header{
