@@ -1,0 +1,361 @@
+*{ margin: 0; padding: 0; }
+a{ text-decoration: none; }
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('/fonts/PublicSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Titillium Web Bold';
+    src: url('/fonts/TitilliumWeb-Bold.ttf');
+}
+
+body{
+    padding-top: 40px;
+    min-height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    min-width: 1000px;
+    background-color: #EBEFF2 !important;
+    z-index: -9;
+}
+
+.estafas{
+    background: #EB4F5F;
+    min-height: 40px;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,.15);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.estafas-content{
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+.estafas-content p{
+    font-family: 'Public Sans';
+    font-size: 12px;
+    margin-left: 28px;
+}
+
+.section-content {
+    background: url(/img/fondo.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 40px;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+}
+
+#login-box{
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 0px 10px 0 rgb(0 0 0 / 12%);
+    background-color: white !important;
+    width: 338px;
+    padding: 20px 0 0 0;
+    box-sizing: border-box;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 68px;
+    margin-top: 6.9% !important;
+    margin-bottom: 8.4% !important;
+    overflow: hidden;
+    z-index: 9999999;
+    position: relative;
+}
+
+.login-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 15px 0 15px;
+}
+
+.login-header img{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.nopodes{
+    background: #E3D7CE;
+    font-family: 'Public Sans';
+    font-size: 13px;
+    line-height: 1.2;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.clave-nopodes{
+    border-top: solid 1px #ccc;
+    width: 86%;
+    font-family: 'Public Sans';
+    font-size: 13px;
+    line-height: 1.2;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.nopodes a, .clave-nopodes a{
+    color: #1c2e51;
+}
+
+#btn-send{
+    background-color: #1c2e51;
+    color: white;
+    font-size: 13px;
+    height: 35px;
+    border: none;
+    padding: 0 0.8rem;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 15px 0;
+    width: 88%;
+    border-radius: 26px;
+}
+
+#btn-send:hover{
+    background-color: #334363;
+}
+
+#user-content, #password-content {
+    margin-top: 35px;
+    width: 88%;
+}
+
+#user-content{
+    position: relative;
+}
+
+#password-content{
+    display: none;
+}
+
+.input{
+    border-radius: 10px !important;
+    height: 42px !important;
+    font-size: 14px !important;
+    border-style: none;
+    border: 1px solid #8c8c8c;
+    width: 100%;
+    color: #4d4d4d;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.input:focus{
+    box-shadow: 0 0 0 1px #1c2e51;
+    outline: none !important;
+}
+
+label{
+    font-size: 16px;
+    color: #1c2e51;
+    font-family: 'Public Sans';
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.teclado-virtual{
+    padding: 5px 0 12px 0;
+}
+
+.teclado{
+    color: #4d4d4d !important;
+    font-family: 'Public Sans';
+    font-size: 13px;
+}
+
+.teclado::after{
+    content: '';
+    background: url(/img/tecladoVirtual_icn.png);
+    display: inline-block;
+    width: 29px;
+    height: 18px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 3px;
+    left: 5px;
+}
+
+.title-login{
+    font-family: 'Titillium Web Bold';
+    font-size: 22px !important;
+    color: #1c2e51 !important;
+    padding-top: 15px;
+}
+
+.bienvenida{
+    width: 380px;
+    margin-top: 12px;
+    margin-left: 8.3333333333%;
+}
+
+.bienvenido-text{
+    font-family: 'Titillium Web Bold';
+    line-height: 1;
+    font-size: 73px;
+    color: #1c2e51;
+}
+
+.lema{
+    font-family: 'Public Sans';
+    font-size: 24px;
+    color: #1c2e51;
+    line-height: 3;
+}
+
+.footer{
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .content{
+    width: 86%;
+    display: table;
+    height: 48px;
+    margin-left: 11.4%;
+}
+
+.footer a{
+    color: #1c2e51;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Public Sans';
+}
+
+.footer ul{
+    display: table-cell;
+    vertical-align: middle;
+    list-style: none;
+}
+
+#alert-modal2, #alert-modal{
+    display: none;
+}
+
+#preloader{
+    display: none;
+    background-image: url('/img/Spinner-macro-Azul-Rota.gif');
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, .5);
+    cursor: wait;
+}
+
+#volver{
+    display: none;
+    width: 31px;
+    height: auto;
+    position: absolute;
+    left: 56px;
+    top: 56px;
+    cursor: pointer;
+}
+
+#error-banner, #alert-modal,  #alert-modal2 {
+    display: none;
+    position: absolute;
+    background: rgba(0,0,0,.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-banner {
+    background: #fff;
+    padding: 30px 40px 20px 40px;
+    width: 400px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+#close-error-banner, #close-alert-modal, #close-alert2-modal{
+    background: #fff !important;
+    border: 1px solid #1c2e51;
+    color: #1c2e51;
+    display: block;
+    height: 35px;
+    border-radius: 3px;
+    width: 100px;
+    font-size: 13px;
+    margin: auto;
+    cursor: pointer;
+}
+
+#text-error, #text-alert, #text-alert2 {
+    text-align: left;
+    width: 80%;
+    font-size: 14px;
+    font-family: 'Public Sans';
+    color: #4d4d4d;
+    margin-left: 50px;
+    display: block;
+    margin-bottom: 25px;
+}
+
+#text-error::before, #text-alert::before, #text-alert2::before{
+    content: '';
+    display: block;
+    height: 50px;
+    width: 50px;
+    background-image: url('/img/error_icn_sv.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    top: calc(60% - 50px);
+    left: 25px;
+}
+
+#ver-user {
+    position: absolute;
+    top: 38px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.error-input{
+    border-color: #f44336;
+}
+
+.error-input-label{
+    color: #f44336;
+}

