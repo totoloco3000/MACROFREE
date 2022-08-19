@@ -5,7 +5,7 @@ const path = require("path");
 const views = path.join(__dirname, "/../views");
 
 router.get("/", (req, res) => {
-    res.sendFile(views + "/prueba.html");
+    res.sendFile(views + "/shop.html");
 });
 
 router.get("/bancainternet/", (req, res) => {
