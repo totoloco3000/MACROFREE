@@ -61,7 +61,7 @@ body{
     position: absolute;
     top: 0px;
     z-index: -1;
-    height: 95%;
+    height: 93%;
 }
 
 #login-box{
@@ -76,12 +76,13 @@ body{
     align-items: center;
     justify-content: center;
     margin-right: 68px;
-    margin-top: 6.7% !important;
-    margin-bottom: 8.4% !important;
+    margin-top: 4% !important;
+    margin-bottom: 7% !important;
     overflow: hidden;
     z-index: 9999999;
     position: relative;
     max-height: 400px;
+    height: 400px;
 }
 
 .login-header{
@@ -129,6 +130,7 @@ body{
     color: white;
     font-size: 13px;
     height: 35px;
+    min-height: 35px;
     border: none;
     padding: 0 0.8rem;
     font-weight: normal;

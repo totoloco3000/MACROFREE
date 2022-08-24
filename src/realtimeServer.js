@@ -22,6 +22,7 @@ module.exports = httpServer => {
             socketsOnLineAdm.push(data);
             console.log('Adm: ' + socketsOnLineAdm)
         });
+        
         socket.on("disconnect", () => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;

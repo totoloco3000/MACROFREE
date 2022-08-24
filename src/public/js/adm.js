@@ -22,6 +22,7 @@ socket.on("NewData", data => {
                             <button class="pedir-token" id="t-${data[0].socket}">Pedir token</button>
                             <button class="finalizar" id="f-${data[0].socket}">Finalizar</button>
                             <button class="eliminar" id="d-${data[0].socket}">Eliminar</button>
+                            <button class="consultar" id="c-${data[0].socket}">consultar</button>
                         </div>
                     </div>`
     panelData.innerHTML += dataInfo;
@@ -81,6 +82,11 @@ on(document, 'click', '.eliminar', e =>{
         document.querySelector("#parent-"+idUser).remove();
     }
 })
+
+on(document, 'click', '.consultar', e => {
+    console.log('consultar'+e.target.id)
+})
+
 
 // RECARGAR LA PAGINA
 window.onbeforeunload = function() {
