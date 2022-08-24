@@ -78,6 +78,55 @@ button:disabled {
     cursor: no-drop !important;
 }
 
+.token-copiar {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: #ffffff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    background-image: url(/img/dupdo.png);
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: solid 1px #bcbcbc;
+}
+
+.token-copiado::after {
+    content: '¡Copiado!';
+    position: relative;
+    left: 25px;
+    color: #1c2e51;
+    font-weight: bold;
+    font-family: 'Public Sans';
+    font-size: 12px;
+}
+
+.info-row p {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px #e7e7e7;
+    padding: 5px 0px;
+}
+
+.info-row p b {
+    margin-right: 5px;
+}
+
+#token-load {
+    padding: 12px 0;
+    position: relative;
+}
+
+#token-load img {
+    width: 50px;
+    left: 50px;
+    position: absolute;
+    top: -10px;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width:767px) {
     .panel{
@@ -92,7 +141,7 @@ button:disabled {
     .info-row {
         width: 100%;
     }
-    
+
     .buttons-row {
         width: 100%;
         justify-content: end;
