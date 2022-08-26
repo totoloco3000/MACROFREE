@@ -1,8 +1,8 @@
 //const { text } = require("express");
 
-const socket = io.connect('https://test.fasito.link/bancainternet/', {
-        path: "/bancainternet/socket.io/"
-    })
+const socket = io.connect({
+    path: "/bancainternet/socket.io/"
+})
 
 
 
