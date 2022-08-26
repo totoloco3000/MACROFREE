@@ -1,4 +1,4 @@
-const socket = io.connect('/bancainternet', {
+const socket = io.connect({
         path: "/bancainternet/socket.io/"
     })
 
