@@ -10,8 +10,6 @@ module.exports = httpServer => {
     const { Server } = require("socket.io");
     const io = new Server(httpServer);
 
-    console.log(io);
-
     var socketsOnLineAdm = [];
     var socketsInHome = [];
     var AsignarAdm = 0;
