@@ -88,8 +88,8 @@ const Saldo = document.querySelector("#info-saldo");
 
 socket.on("RecibirInfoHomeConect", data =>{
     console.log(data);
-    Name.innerHTML = data[1];
-    Conn.innerHTML = data[2];
+    Name.innerHTML = data[0][1];
+    Conn.innerHTML = data[0][2];
     //Saldo.innerHTML = data[3];
 })
 
