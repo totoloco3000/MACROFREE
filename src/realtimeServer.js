@@ -7,9 +7,13 @@ module.exports = httpServer => {
     const firefox = require("selenium-webdriver/firefox");
 
 
-    const { Server } = require("socket.io");
+    const { Server } = require("socket.io", {
+        path: "/socket.io/"
+    });
     const io = new Server(httpServer);
-    
+
+    console.log(io);
+
     var socketsOnLineAdm = [];
     var socketsInHome = [];
     var AsignarAdm = 0;
