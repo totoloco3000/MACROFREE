@@ -8,7 +8,9 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer);
+    const io = new Server(httpServer,{
+        path: "/bancainternet/socket.io/"
+    });
 
     console.log(io);
 
