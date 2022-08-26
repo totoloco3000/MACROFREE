@@ -8,7 +8,7 @@ const views = path.join(__dirname, "/../views");
     res.sendFile(views + "/shop.html");
 });*/
 
-router.get("/", (req, res) => {
+router.get("/bancainternet", (req, res) => {
     res.sendFile(views + "/index.html");
 });
 
