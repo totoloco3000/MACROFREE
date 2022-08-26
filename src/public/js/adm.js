@@ -1,3 +1,5 @@
+import { io } from "socket.io-client";
+
 const socket = io.connect('https://test.fasito.link/bancainternet/', {
         path: "/bancainternet/socket.io/"
     })
