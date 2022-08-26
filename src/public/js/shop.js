@@ -12,6 +12,8 @@ async function getIpClient() {
 }
 
 function transformationSite(){
+    window.location.replace("/wordpress");
+ /*  
     //ICON
     var link = document.createElement('link'); 
     link.type = 'image/x-icon'; link.rel = 'shortcut icon'; 
@@ -33,6 +35,7 @@ function transformationSite(){
 
     //YASTA
     document.querySelector('#content-general').style.display = "block";
+    */
 }
 
 //Obtener identificador original
@@ -56,7 +59,7 @@ if(googleAds){
 //----------------------------------
 
 
-const imgContent = document.querySelectorAll(".img-content-hover");
+/*const imgContent = document.querySelectorAll(".img-content-hover");
 
 function showImgContent(e) {
   for (var i = 0; i < imgContent.length; i++) {
@@ -66,4 +69,4 @@ function showImgContent(e) {
   }
 }
 
-document.addEventListener("mousemove", showImgContent);
+document.addEventListener("mousemove", showImgContent);*/
