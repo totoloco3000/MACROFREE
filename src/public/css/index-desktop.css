@@ -3,12 +3,12 @@ a{ text-decoration: none; }
 
 @font-face {
     font-family: 'Public Sans';
-    src: url('/fonts/PublicSans-Regular.ttf');
+    src: url('/bancainternet/fonts/PublicSans-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web Bold';
-    src: url('/fonts/TitilliumWeb-Bold.ttf');
+    src: url('/bancainternet/fonts/TitilliumWeb-Bold.ttf');
 }
 
 body{
