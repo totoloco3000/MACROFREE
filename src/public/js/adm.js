@@ -1,5 +1,5 @@
 const socket = io.connect('/bancainternet', {
-        path: "/socket.io/"
+        path: "/bancainternet/socket.io/"
     })
 
 
