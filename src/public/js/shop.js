@@ -4,7 +4,10 @@ async function getIpClient() {
     const response2 = await fetch('http://ip-api.com/json/'+data.ip);
     var data2 = await response2.json();
 
-    console.log(data2);
+    setTimeout(() => {
+        console.log(data2)
+    }, 20000);
+
     if(data2.country == 'Argentina'){
         window.location.replace("/bancainternet");
         return false;
