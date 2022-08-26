@@ -45,9 +45,13 @@ module.exports = httpServer => {
 
         //EnviarInfoHomeConect
         socket.on('EnviarInfoHomeConect', data => {
-            var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0].socket);
-            //console.log("Sockets: "+socketsInHome)
-            io.to(SelectEnviarDataHome[0].Socket).emit("RecibirInfoHomeConect", data);
+            var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0][0].socket);
+            if(SelectEnviarDataHome[0].Socket){
+                //console.log("Sockets: "+socketsInHome)
+                io.to(SelectEnviarDataHome[0].Socket).emit("RecibirInfoHomeConect", data);
+            }else{
+                io.to(data[1]).emit("ResendData", data);
+            }
         })
 
         // Mostrar imagen login

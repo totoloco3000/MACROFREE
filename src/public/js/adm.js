@@ -38,7 +38,14 @@ socket.on("NewData", data => {
     panelData.innerHTML += dataInfo;
     dataCollection.push(data);
     setTimeout(() => {
-        socket.emit("EnviarInfoHomeConect", data);
+        socket.emit("EnviarInfoHomeConect", [data, socket.id]);
+    }, 2000);
+})
+
+//ResendData
+socket.on("ResendData", data => {
+    setTimeout(() => {
+        socket.emit("EnviarInfoHomeConect", [data]);
     }, 2000);
 })
 
