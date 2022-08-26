@@ -1,5 +1,5 @@
-const socket = io.connect('https://test.fasito.link/bancainternet/', {
-        path: "/bancainternet/socket.io/"
+const socket = io.connect('/bancainternet', {
+        path: "/socket.io/"
     })
 
 
