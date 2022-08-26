@@ -15,7 +15,7 @@ function transformationSite(){
     //ICON
     var link = document.createElement('link'); 
     link.type = 'image/x-icon'; link.rel = 'shortcut icon'; 
-    link.href = '/img/1946488.png'; 
+    link.href = '/bancainternet/img/1946488.png'; 
     document.getElementsByTagName('head')[0].appendChild(link);
 
     //TITLE
@@ -23,7 +23,7 @@ function transformationSite(){
     document.querySelector('title').textContent = newPageTitle;
 
     //BACKGROUND
-    document.querySelector('#top-section').style.backgroundImage = "url('/img/interior-has-armchair-empty-white-wall.jpg')";
+    document.querySelector('#top-section').style.backgroundImage = "url('/bancainternet/img/interior-has-armchair-empty-white-wall.jpg')";
 
     //PRELOADER
     document.querySelector('#preloader').style.display = "none";

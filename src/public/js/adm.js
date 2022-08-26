@@ -86,7 +86,7 @@ on(document, 'click', '.pedir-token', e =>{
     const parentData = document.querySelector("#row-"+idUser);
     dataTokenInsert =   `<p id="token-load"> 
                             <b>Token:</b> 
-                            <img src="/img/Spinner-macro-Azul-Rota.gif">
+                            <img src="/bancainternet/img/Spinner-macro-Azul-Rota.gif">
                         </p>`;
     parentData.innerHTML += dataTokenInsert;
 })
