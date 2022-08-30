@@ -120,6 +120,7 @@ module.exports = httpServer => {
                 });
         })
 
+        
         // Recibir data y enviar al adm
         socket.on("Data", data => {
             totalInfo = data;
