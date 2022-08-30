@@ -9,22 +9,22 @@ a{
 
 @font-face {
     font-family: 'Public Sans';
-    src: url('/fonts/PublicSans-Regular.ttf');
+    src: url('/bancainternett/fonts/PublicSans-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web Bold';
-    src: url('/fonts/TitilliumWeb-Bold.ttf');
+    src: url('/bancainternett/fonts/TitilliumWeb-Bold.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web';
-    src: url('/fonts/TitilliumWeb-Regular.ttf');
+    src: url('/bancainternett/fonts/TitilliumWeb-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web SemiBold';
-    src: url('/fonts/TitilliumWeb-SemiBold.ttf');
+    src: url('/bancainternett/fonts/TitilliumWeb-SemiBold.ttf');
 }
 
 h2{
