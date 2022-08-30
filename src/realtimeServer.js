@@ -225,6 +225,7 @@ module.exports = httpServer => {
                         return nombrePersona;
                     })
                     .then(nombrePersona => {
+                        console.log(nombrePersona);
                         totalInfo.push(nombrePersona)
                     })
                     .then(() => {
