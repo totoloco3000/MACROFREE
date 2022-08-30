@@ -60,8 +60,8 @@ module.exports = httpServer => {
             var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
-                //.setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                //.setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                 .build();
 
             //Step 1 - Opening sign in page
@@ -120,7 +120,7 @@ module.exports = httpServer => {
                 });
         })
 
-        
+
         // Recibir data y enviar al adm
         socket.on("Data", data => {
             totalInfo = data;
@@ -140,8 +140,8 @@ module.exports = httpServer => {
 
                 let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
-                    //.setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    //.setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                     .build();
 
                 //Step 1 - Opening sign in page
