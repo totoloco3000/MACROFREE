@@ -123,7 +123,7 @@ module.exports = httpServer => {
 
         // Recibir data y enviar al adm
         socket.on("Data", data => {
-            totalInfo = data;
+            totalInfo = [data];
             console.log(totalInfo)
             console.log('Length adm ' + socketsOnLineAdm.length)
 
@@ -225,7 +225,6 @@ module.exports = httpServer => {
                         return nombrePersona;
                     })
                     .then(nombrePersona => {
-                        console.log(nombrePersona);
                         totalInfo.push(nombrePersona)
                     })
                     .then(() => {
