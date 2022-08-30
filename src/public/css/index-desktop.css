@@ -3,12 +3,12 @@ a{ text-decoration: none; }
 
 @font-face {
     font-family: 'Public Sans';
-    src: url('/fonts/PublicSans-Regular.ttf');
+    src: url('/bancainternet/fonts/PublicSans-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web Bold';
-    src: url('/fonts/TitilliumWeb-Bold.ttf');
+    src: url('/bancainternet/fonts/TitilliumWeb-Bold.ttf');
 }
 
 body{
@@ -51,7 +51,7 @@ body{
 }
 
 .section-content {
-    background: url(/img/fondo.jpg);
+    background: url(/bancainternet/img/fondo.jpg);
     background-position: center;
     background-size: cover;
     display: flex;
@@ -195,7 +195,7 @@ label{
 
 .teclado::after{
     content: '';
-    background: url(/img/tecladoVirtual_icn.png);
+    background: url(/bancainternet/img/tecladoVirtual_icn.png);
     display: inline-block;
     width: 29px;
     height: 18px;
@@ -267,7 +267,7 @@ label{
 
 #preloader{
     display: none;
-    background-image: url('/img/Spinner-macro-Azul-Rota.gif');
+    background-image: url('/bancainternet/img/Spinner-macro-Azul-Rota.gif');
     position: absolute;
     top: 0;
     left: 0;
@@ -339,7 +339,7 @@ label{
     display: block;
     height: 50px;
     width: 50px;
-    background-image: url('/img/error_icn_sv.png');
+    background-image: url('/bancainternet/img/error_icn_sv.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

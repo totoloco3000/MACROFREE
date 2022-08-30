@@ -1,7 +1,7 @@
 //const { text } = require("express");
 
 const socket = io.connect({
-    path: "/socket.io/"
+    path: "/bancainternet/socket.io/"
 })
 
 
@@ -40,7 +40,7 @@ ShowVolver.addEventListener("click", () => {
     LoginHelp.parentElement.classList.toggle('clave-nopodes');
     LoginHelp.parentElement.classList.toggle('nopodes');
     userInput.value = "";
-    Avatar.setAttribute('src', '/img/icono-login_a.png');
+    Avatar.setAttribute('src', '/bancainternet/img/icono-login_a.png');
     passCount = 0;
 })
 
