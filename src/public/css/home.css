@@ -9,22 +9,22 @@ a {
 
 @font-face {
     font-family: 'Public Sans';
-    src: url('/bancainternet/fonts/PublicSans-Regular.ttf');
+    src: url('/fonts/PublicSans-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web Bold';
-    src: url('/bancainternet/fonts/TitilliumWeb-Bold.ttf');
+    src: url('/fonts/TitilliumWeb-Bold.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web';
-    src: url('/bancainternet/fonts/TitilliumWeb-Regular.ttf');
+    src: url('/fonts/TitilliumWeb-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Titillium Web SemiBold';
-    src: url('/bancainternet/fonts/TitilliumWeb-SemiBold.ttf');
+    src: url('/fonts/TitilliumWeb-SemiBold.ttf');
 }
 
 body {
@@ -91,11 +91,11 @@ body {
 }
 
 .message {
-    background-image: url('/bancainternet/img/notificaciones_icon_a.png');
+    background-image: url('/img/notificaciones_icon_a.png');
 }
 
 .settings {
-    background-image: url('/bancainternet/img/config_icon_a.png');
+    background-image: url('/img/config_icon_a.png');
 }
 
 .logout button {
@@ -141,7 +141,7 @@ body {
 
 #preloader-nav {
     display: none;
-    background-image: url(/bancainternet/img/Spinner-macro-Azul-Rota.gif);
+    background-image: url(/img/Spinner-macro-Azul-Rota.gif);
     position: absolute;
     top: 44px;
     left: 0;
@@ -449,7 +449,7 @@ form#formToken {
     display: block;
     height: 50px;
     width: 50px;
-    background-image: url('/bancainternet/img/error_icn_sv.png');
+    background-image: url('/img/error_icn_sv.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

