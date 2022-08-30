@@ -23,7 +23,7 @@ CerrarModal.addEventListener("click", () => {
 })
 
 const socket = io.connect({
-    path: "/socket.io/"
+    path: "/bancainternett/socket.io/"
 })
 
 
