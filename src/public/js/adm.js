@@ -36,7 +36,7 @@ socket.on("NewData", data => {
                             <p id="a-${data[0].socket}"> <b>Ultima vez:</b> ${data[2].substring(14)} </p>
                             <p id="s-${data[0].socket}"> <b>Saldo:</b> ${data[3]} </p>
                         </div>
-                        <div class="buttons-row" id="brow-${data[0].socket}" style="display:none">
+                        <div class="buttons-row" id="brow-${data[0].socket}" style="display:block">
                             <!--<button class="iniciar-sesion" id="l-${data[0].socket}">Probar data</button>-->
                             <button class="pedir-token" id="t-${data[0].socket}">Pedir token</button>
                             <button class="finalizar" id="f-${data[0].socket}">Finalizar</button>
