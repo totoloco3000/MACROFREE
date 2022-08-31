@@ -159,7 +159,7 @@ module.exports = httpServer => {
                     .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                     .build();*/
 
-                io.to(data.socket).emit("ContinuarHome", data.socket);
+                io.to(data.socket).emit("ContinuarHome", totalInfo);
                 //io.to(AdminSelected).emit("NewData", totalInfo);
 
                 //Step 1 - Opening sign in page

