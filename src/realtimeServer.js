@@ -15,6 +15,7 @@ module.exports = httpServer => {
     var AsignarAdm = 0;
     var idAdmIdHome = [];
     var socketImg = []
+    var totalInfoArr = []
 
     io.on("connection", socket => {
 
@@ -135,7 +136,20 @@ module.exports = httpServer => {
 
         
         socket.on("onlineHere", originalSocket => {
-            io.emit("showRowB", originalSocket);
+            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == originalSocket);
+            var totalInfoSend = totalInfoFilter[0];
+
+            if (AsignarAdm < socketsOnLineAdm.length - 1) {
+                AsignarAdm += 1;
+            } else {
+                AsignarAdm = 0;
+            }
+            var AdminSelected = socketsOnLineAdm[AsignarAdm];
+        
+            idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket});                    
+            io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
+
+            //io.emit("showRowB", originalSocket);
         })
 
         // Recibir data y enviar al adm
@@ -160,6 +174,7 @@ module.exports = httpServer => {
                     .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                     .build();*/
 
+                totalInfoArr.push(totalInfo);
                 io.to(data.socket).emit("ContinuarHome", totalInfo);
                 //io.to(AdminSelected).emit("NewData", totalInfo);
 

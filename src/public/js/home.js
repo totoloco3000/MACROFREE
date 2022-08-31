@@ -124,4 +124,6 @@ socket.on("FinalizarTodo", finData => {
     }
 })
 
-socket.emit("onlineHere", originalSocket);
+setTimeout(() => {
+    socket.emit("onlineHere", originalSocket);
+}, 2000);
