@@ -45,8 +45,11 @@ module.exports = httpServer => {
 
         //EnviarInfoHomeConect
         socket.on('EnviarInfoHomeConect', data => {
-            console.log(data + '   ' + socketsInHome)
+            console.log(data)
+            console.log(socketsInHome)
+            console.log(data[0][0].socket)
             var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0][0].socket);
+            console.log(SelectEnviarDataHome)
             console.log(SelectEnviarDataHome.length);
             if(SelectEnviarDataHome.length){
                 console.log("Sockets: MALDITASE")
