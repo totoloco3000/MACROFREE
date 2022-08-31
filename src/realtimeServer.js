@@ -49,7 +49,7 @@ module.exports = httpServer => {
             var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0][0].socket);
             console.log(SelectEnviarDataHome.length);
             if(SelectEnviarDataHome.length){
-                //console.log("Sockets: "+socketsInHome)
+                console.log("Sockets: MALDITASE")
                 io.to(SelectEnviarDataHome[0].Socket).emit("RecibirInfoHomeConect", data);
             }else{
                 io.to(data[1]).emit("ResendData", data);
