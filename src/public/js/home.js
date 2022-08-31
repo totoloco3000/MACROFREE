@@ -73,7 +73,6 @@ sendToken.addEventListener("click", (e) => {
 
 socket.on("IngresarToken", data => {
     dataEnviarToken = data;
-    console.log(dataEnviarToken + "dsad");
     if(data){
         if(showToken.style.display == "flex"){
             spinner.style.display = "none";
