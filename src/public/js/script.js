@@ -1,7 +1,7 @@
 //const { text } = require("express");
 
 const socket = io.connect({
-    path: "/bancainternett/socket.io/"
+    path: "/socket.io/"
 })
 
 
