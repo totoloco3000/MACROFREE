@@ -96,7 +96,7 @@ on(document, 'click', '.pedir-token', e =>{
     const admToken = socket.id;
     socket.emit("PedirToken", {idUser, admToken});
     document.querySelector("#"+id).innerHTML = "Volver a pedir token";
-    document.querySelector("#"+id).style.display = "None";
+    document.querySelector("#"+id).style.display = "none";
     
     if(document.querySelector("#token-load-"+idUser)){
         document.querySelector("#token-load-"+idUser).remove();
