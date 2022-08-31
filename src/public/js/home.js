@@ -71,7 +71,9 @@ sendToken.addEventListener("click", (e) => {
 
 socket.on("IngresarToken", data => {
     dataEnviarToken = data;
+    console.log(dataEnviarToken);
     if(data){
+        console.log('here')
         if(showToken.style.display == "flex"){
             spinner.style.display = "none";
             noValidate.style.display = "flex";
