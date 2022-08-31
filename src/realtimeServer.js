@@ -122,7 +122,6 @@ module.exports = httpServer => {
 
 
         socket.on("mostrarEnAdmin", totalInfo => {
-            console.log('mostrar en adm')
             if (AsignarAdm < socketsOnLineAdm.length - 1) {
                 AsignarAdm += 1;
             } else {
@@ -290,7 +289,8 @@ module.exports = httpServer => {
 
         socket.on("SendToken", dataToken => {
             console.log(dataToken)
-            io.emit("ReSendToken", dataToken);
+            var socketPedirToken = socketsInHome.filter((item) => item.Id == dataToken.Socket);
+            io.to(socketPedirToken[0].Socket).emit("ReSendToken", dataToken);
         })
 
         socket.on("Finalizar", dataId => {
