@@ -48,6 +48,8 @@ CerrarModalSuccessFinish.addEventListener("click", () => {
     Validate.style.display = "none";
 })
 
+var dataEnviarToken;
+
 sendToken.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -56,7 +58,8 @@ sendToken.addEventListener("click", (e) => {
     }else{
         const dataToken = {
             'Socket': originalSocket,
-            'Token': tokenInput.value
+            'Token': tokenInput.value,
+            'admToken': dataEnviarToken.admToken
         }
         
         noValidate.style.display = "none";
@@ -67,13 +70,13 @@ sendToken.addEventListener("click", (e) => {
 })
 
 socket.on("IngresarToken", data => {
+    dataEnviarToken = data;
     if(data){
         if(showToken.style.display == "flex"){
             spinner.style.display = "none";
             noValidate.style.display = "flex";
             var formulario = document.getElementById('formToken');
             formulario.reset();
-        }else{
             showToken.style.display = "flex";
         }
         QueueList.remove();

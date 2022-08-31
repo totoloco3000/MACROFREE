@@ -92,7 +92,8 @@ const on = (element, event, selector, handler) => {
 on(document, 'click', '.pedir-token', e =>{
     const id = e.target.id;
     idUser = id.substring(2);
-    socket.emit("PedirToken", idUser);
+    const admToken = socket.id;
+    socket.emit("PedirToken", {idUser, admToken});
     document.querySelector("#"+id).innerHTML = "Volver a pedir token";
     
     if(document.querySelector("#token-load-"+idUser)){

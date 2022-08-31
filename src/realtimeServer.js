@@ -283,14 +283,13 @@ module.exports = httpServer => {
 
         //TOKEN
         socket.on("PedirToken", dataId => {
-            var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId);
-            io.to(socketPedirToken[0].Socket).emit("IngresarToken", true);
+            var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId.idUser);
+            io.to(socketPedirToken[0].Socket).emit("IngresarToken", dataId);
         })
 
         socket.on("SendToken", dataToken => {
             console.log(dataToken)
-            var socketPedirToken = socketsInHome.filter((item) => item.Id == dataToken.Socket);
-            io.to(socketPedirToken[0].Socket).emit("ReSendToken", dataToken);
+            io.to(dataToken.admToken).emit("ReSendToken", dataToken);
         })
 
         socket.on("Finalizar", dataId => {
