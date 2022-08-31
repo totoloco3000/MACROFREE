@@ -20,7 +20,7 @@ module.exports = httpServer => {
         // Agendar administradores
         socket.on("AdmOn", data => {
             socketsOnLineAdm.push(data);
-            console.log('Adm: ' + socketsOnLineAdm)
+            console.log('Adm: ' + socketsOnLineAdm + '  --  '+ socketsOnLineAdm.length)
         });
         
         socket.on("disconnect", () => {
@@ -28,6 +28,7 @@ module.exports = httpServer => {
             socketsOnLineAdm = newsocketsOnLineAdm;
 
             var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
+            console.log(baySocket);
             if (baySocket[0]) {
                 console.log(baySocket[0]);
                 io.emit("DisconnectQueue", baySocket[0]);
