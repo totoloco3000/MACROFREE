@@ -45,7 +45,7 @@ module.exports = httpServer => {
 
         //EnviarInfoHomeConect
         socket.on('EnviarInfoHomeConect', data => {
-            console.log('EnviarInfoHomeConect')
+            console.log(data)
             var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0][0].socket);
             if(SelectEnviarDataHome.length){
                 //console.log("Sockets: "+socketsInHome)
