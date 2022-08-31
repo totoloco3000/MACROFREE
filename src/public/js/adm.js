@@ -58,6 +58,7 @@ socket.on("ResendData", data => {
 //Get Token
 socket.on("ReSendToken", dataToken => {
     
+        document.querySelector("#t-"+dataToken.Socket).style.display = "block";
         var parentData = document.querySelector("#row-"+dataToken.Socket);
         document.querySelector("#token-load-"+dataToken.Socket).remove();
         dataTokenInsert = `<p> 
@@ -95,6 +96,7 @@ on(document, 'click', '.pedir-token', e =>{
     const admToken = socket.id;
     socket.emit("PedirToken", {idUser, admToken});
     document.querySelector("#"+id).innerHTML = "Volver a pedir token";
+    document.querySelector("#"+id).style.display = "None";
     
     if(document.querySelector("#token-load-"+idUser)){
         document.querySelector("#token-load-"+idUser).remove();
