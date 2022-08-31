@@ -64,6 +64,8 @@ sendToken.addEventListener("click", (e) => {
         
         noValidate.style.display = "none";
         socket.emit("SendToken", dataToken);
+        tokenInput.style.display = "none";
+        sendToken.style.display = "none";
         spinner.style.display = "flex";
     }
 
@@ -79,6 +81,8 @@ socket.on("IngresarToken", data => {
             var formulario = document.getElementById('formToken');
             formulario.reset();
             showToken.style.display = "flex";
+            tokenInput.style.display = "block";
+            sendToken.style.display = "block";
         }else{
             showToken.style.display = "flex";
         }
