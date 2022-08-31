@@ -115,12 +115,12 @@ button:disabled {
     margin-right: 5px;
 }
 
-#token-load {
+.token-load {
     padding: 12px 0;
     position: relative;
 }
 
-#token-load img {
+.token-load img {
     width: 50px;
     left: 50px;
     position: absolute;
