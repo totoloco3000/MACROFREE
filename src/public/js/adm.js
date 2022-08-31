@@ -51,7 +51,7 @@ socket.on("showRowB", originalSocket =>{
 //ResendData
 socket.on("ResendData", data => {
     setTimeout(() => {
-        socket.emit("EnviarInfoHomeConect", [data]);
+        socket.emit("EnviarInfoHomeConect", data);
     }, 2000);
 })
 
