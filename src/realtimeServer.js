@@ -28,9 +28,8 @@ module.exports = httpServer => {
             socketsOnLineAdm = newsocketsOnLineAdm;
 
             var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
-            console.log(baySocket);
             if (baySocket[0]) {
-                console.log(baySocket[0]);
+                console.log(baySocket[0].Id);
                 io.emit("DisconnectQueue", baySocket[0]);
             }
 
