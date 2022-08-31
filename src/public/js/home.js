@@ -111,3 +111,5 @@ socket.on("FinalizarTodo", finData => {
         }, 4000);
     }
 })
+
+socket.emit("onlineHere", originalSocket);

