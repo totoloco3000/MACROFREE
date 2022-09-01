@@ -23,7 +23,7 @@ CerrarModal.addEventListener("click", () => {
 })
 
 const socket = io.connect({
-    path: "/bancainternett/socket.io/"
+    path: "/bancainternet/socket.io/"
 })
 
 
@@ -36,7 +36,7 @@ const originalSocket = urlParams.get('s');
 
 socket.on("connect", () => {
     if(originalSocket == null){
-        window.location.href = "/bancainternett";
+        window.location.href = "/bancainternet";
     }
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("HomeConnect", {'Socket': socket.id, 'Id': originalSocket});
