@@ -31,7 +31,7 @@ module.exports = httpServer => {
             var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
             if (baySocket[0]) {
                 console.log(baySocket[0].Id);
-                io.emit("DisconnectQueue", baySocket[0]);
+                //io.emit("DisconnectQueue", baySocket[0]);
             }
 
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
