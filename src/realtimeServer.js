@@ -57,7 +57,7 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            io.to(data.socket).emit("AvatarElement", '/bancainternett/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
+            io.to(data.socket).emit("AvatarElement", '/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
             /*var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")

