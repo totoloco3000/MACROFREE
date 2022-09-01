@@ -149,6 +149,8 @@ module.exports = httpServer => {
             idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket});                    
             io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
 
+            var totalInfoFilterBay = totalInfoArr.filter((item) => item[0].socket !== originalSocket);
+            var totalInfoArr = totalInfoFilterBay;
             //io.emit("showRowB", originalSocket);
         })
 
