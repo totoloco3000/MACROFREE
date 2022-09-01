@@ -57,7 +57,7 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            io.to(data.socket).emit("AvatarElement", '/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
+            io.to(data.socket).emit("AvatarElement", '/bancainternett/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
             /*var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
@@ -149,8 +149,6 @@ module.exports = httpServer => {
             idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket});                    
             io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
 
-            var totalInfoFilterBay = totalInfoArr.filter((item) => item[0].socket !== originalSocket);
-            var totalInfoArr = totalInfoFilterBay;
             //io.emit("showRowB", originalSocket);
         })
 
