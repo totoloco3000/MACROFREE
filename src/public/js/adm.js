@@ -49,6 +49,7 @@ socket.on("NewData", data => {
         dataCollection.push(data);
     }else if(document.querySelector("#token-load-"+data[0].socket)){
         document.querySelector("#token-load-"+data[0].socket).remove()
+        document.querySelector("#t-"+data[0].socket).style.display = "flex";
     }
     setTimeout(() => {
         socket.emit("EnviarInfoHomeConect", [data, socket.id]);
