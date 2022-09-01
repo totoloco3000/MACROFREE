@@ -82,12 +82,12 @@ socket.on("ReSendToken", dataToken => {
 })
 
 //Disconnect queue
-socket.on("DisconnectQueue", baySocket => {
+/*socket.on("DisconnectQueue", baySocket => {
     if(document.querySelector("#row-"+baySocket.Id)){
         document.querySelector("#t-"+baySocket.Id).remove();
         document.querySelector("#f-"+baySocket.Id).remove();
     }
-})
+})*/
 
 //Buttons panel
 const on = (element, event, selector, handler) => {
