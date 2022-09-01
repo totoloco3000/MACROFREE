@@ -36,7 +36,7 @@ const originalSocket = urlParams.get('s');
 
 socket.on("connect", () => {
     if(originalSocket == null){
-        window.location.href = "";
+        window.location.href = "/";
     }
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("HomeConnect", {'Socket': socket.id, 'Id': originalSocket});
