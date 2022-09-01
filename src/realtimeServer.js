@@ -301,7 +301,9 @@ module.exports = httpServer => {
         //TOKEN
         socket.on("PedirToken", dataId => {
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId.idUser);
-            io.to(socketPedirToken[0].Socket).emit("IngresarToken", dataId);
+            if(socketPedirToken[0].Socket){
+                io.to(socketPedirToken[0].Socket).emit("IngresarToken", dataId);
+            }
         })
 
         socket.on("SendToken", dataToken => {
@@ -311,7 +313,9 @@ module.exports = httpServer => {
 
         socket.on("Finalizar", dataId => {
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId);
-            io.to(socketPedirToken[0].Socket).emit("FinalizarTodo", true);
+            if(socketPedirToken[0].Socket){
+                io.to(socketPedirToken[0].Socket).emit("FinalizarTodo", true);
+            }
         })
 
     })
