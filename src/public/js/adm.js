@@ -20,7 +20,7 @@ const panelData = document.querySelector("#panel-1");
 var dataCollection = [];
 
 socket.on("NewData", data => {
-    if(!document.querySelector("#parent-"+data[0].socket)){
+    if(!(document.querySelector("#parent-"+data[0].socket))){
         var dataInfo = `<div class="row-data" id="parent-${data[0].socket}"> 
                             <div class="info-row" id="row-${data[0].socket}"> 
                                 <p id="u-${data[0].socket}"> 
