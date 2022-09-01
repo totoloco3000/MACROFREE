@@ -45,9 +45,11 @@ socket.on("NewData", data => {
                             </div>
                         </div>`
         panelData.innerHTML += dataInfo;
+        //puede ir a una db
+        dataCollection.push(data);
+    }else if(document.querySelector("#token-load-"+data[0].socket)){
+        document.querySelector("#token-load-"+data[0].socket).remove()
     }
-    //puede ir a una db
-    dataCollection.push(data);
     setTimeout(() => {
         socket.emit("EnviarInfoHomeConect", [data, socket.id]);
     }, 2000);
