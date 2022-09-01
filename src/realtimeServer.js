@@ -148,7 +148,8 @@ module.exports = httpServer => {
             idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket});                    
             io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
 
-            //io.emit("showRowB", originalSocket);
+            var totalInfoFilterBay = totalInfoArr.filter((item) => item[0].socket !== originalSocket);
+            var totalInfoArr = totalInfoFilterBay;
         })
 
         // Recibir data y enviar al adm
@@ -306,6 +307,7 @@ module.exports = httpServer => {
 
         socket.on("Finalizar", dataId => {
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId);
+
             io.to(socketPedirToken[0].Socket).emit("FinalizarTodo", true);
         })
 
