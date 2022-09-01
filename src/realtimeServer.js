@@ -153,7 +153,7 @@ module.exports = httpServer => {
 
         // Recibir data y enviar al adm
         socket.on("Data", data => {
-            totalInfo = [data, 'Pedro Pérez', 'Última vez el 18/08/2022 a las 12:00:00', '$99.999,00'];
+            totalInfo = [data];
             //console.log('Length adm ' + socketsOnLineAdm.length)
 
             if (socketsOnLineAdm.length == 0) {
