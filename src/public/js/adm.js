@@ -10,10 +10,16 @@ const getAdm = urlParams.get('s');
 
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
-    if(getAdm == null){
-        window.location.href = "/adm/?s="+socket.id;
-    }
     socket.emit("AdmOn", {'socketSesion': socket.id, 'Id': getAdm});
+})
+
+socket.on("admAssignOtherId", NewId => {
+    window.location.href = "/adm/?s="+NewId;
+})
+
+
+socket.on("countOfAdm", count => {
+    document.querySelector("#countAdm").innerHTML = count;
 })
 
 const panelData = document.querySelector("#panel-1");
@@ -88,10 +94,10 @@ socket.on("ReSendToken", dataToken => {
 })
 
 //Disconnect queue
-/*socket.on("DisconnectQueue", baySocket => {
-    if(document.querySelector("#row-"+baySocket.Id)){
-        document.querySelector("#t-"+baySocket.Id).remove();
-        document.querySelector("#f-"+baySocket.Id).remove();
+/*socket.on("DisconnectQueue", byeSocket => {
+    if(document.querySelector("#row-"+byeSocket.Id)){
+        document.querySelector("#t-"+byeSocket.Id).remove();
+        document.querySelector("#f-"+byeSocket.Id).remove();
     }
 })*/
 
@@ -119,7 +125,7 @@ on(document, 'click', '.pedir-token', e =>{
     const parentData = document.querySelector("#row-"+idUser);
     dataTokenInsert =   `<p class="token-load" id="token-load-${idUser}"> 
                             <b>Token:</b> 
-                            <img src="/img/Spinner-macro-Azul-Rota.gif">
+                            <img src="/img/spinner-general.gif">
                         </p>`;
     parentData.innerHTML += dataTokenInsert;
 })
@@ -142,7 +148,7 @@ on(document, 'click', '.token-copiar', e =>{
     document.querySelector('#'+id).classList.toggle('token-copiado');
     setTimeout(() => {
         document.querySelector('#'+id).classList.toggle('token-copiado');
-    }, 1000);
+    }, 250);
 })
 
 on(document, 'click', '.finalizar', e =>{
@@ -155,6 +161,10 @@ on(document, 'click', '.finalizar', e =>{
 
 on(document, 'click', '.eliminar', e =>{
     if(confirm('¿Deseas eliminar este registro?')){
+
+        if(document.querySelector("#f-"+idUser)){
+            socket.emit("Finalizar", idUser);
+        }
         const id = e.target.id;
         idUser = id.substring(2);
         document.querySelector("#parent-"+idUser).remove();

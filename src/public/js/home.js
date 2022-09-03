@@ -35,9 +35,6 @@ const urlParams = new URLSearchParams(queryString);
 const originalSocket = urlParams.get('s');
 
 socket.on("connect", () => {
-    if(originalSocket == null){
-        window.location.href = "/";
-    }
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("HomeConnect", {'Socket': socket.id, 'Id': originalSocket});
 })
@@ -124,6 +121,12 @@ socket.on("FinalizarTodo", finData => {
     }
 })
 
+socket.on("goLogin", data =>{
+    if(data){
+        window.location.replace("/");
+    }
+})
+
 setTimeout(() => {
-    socket.emit("onlineHere", originalSocket);
+    socket.emit("onlineHere", {'originalSocket': originalSocket, 'socketId': socket.id});
 }, 2000);

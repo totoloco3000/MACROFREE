@@ -1,3 +1,5 @@
+const { emit } = require("nodemon");
+
 module.exports = httpServer => {
 
     const chrm = require("chromedriver");
@@ -21,17 +23,27 @@ module.exports = httpServer => {
 
         // Agendar administradores
         socket.on("AdmOn", data => {
-            socketsOnLineAdm.push(data);
+            var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.Id == data.Id);
+            if (newsocketsOnLineAdm.length == 0) {
+                socketsOnLineAdm.push(data);
+                io.emit("countOfAdm", socketsOnLineAdm.length);
+            } else {
+                io.to(data.socketSesion).emit("admAssignOtherId", Math.random());
+            }
+
         });
-        
+
         socket.on("disconnect", () => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.socketSesion !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;
+            if (newsocketsOnLineAdm.length != socketsOnLineAdm) {
+                io.emit("countOfAdm", socketsOnLineAdm.length);
+            }
 
-            var baySocket = socketsInHome.filter((item) => item.Socket == socket.id);
-            if (baySocket[0]) {
-                console.log(baySocket[0].Id);
-                //io.emit("DisconnectQueue", baySocket[0]);
+            var byeSocket = socketsInHome.filter((item) => item.Socket == socket.id);
+            if (byeSocket[0]) {
+                console.log(byeSocket[0].Id);
+                //io.emit("DisconnectQueue", byeSocket[0]);
             }
 
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
@@ -47,9 +59,9 @@ module.exports = httpServer => {
         //EnviarInfoHomeConect
         socket.on('EnviarInfoHomeConect', data => {
             var SelectEnviarDataHome = socketsInHome.filter((item) => item.Id == data[0][0].socket);
-            if(SelectEnviarDataHome.length){
+            if (SelectEnviarDataHome.length) {
                 io.to(SelectEnviarDataHome[0].Socket).emit("RecibirInfoHomeConect", data);
-            }else{
+            } else {
                 io.to(data[1]).emit("ResendData", data);
             }
         })
@@ -129,27 +141,46 @@ module.exports = httpServer => {
                 AsignarAdm = 0;
             }
             var AdminSelected = socketsOnLineAdm[AsignarAdm];
-        
-            idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfo[0].socket});                    
+
+            idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfo[0].socket });
             io.to(AdminSelected.socketSesion).emit("NewData", totalInfo);
         })
 
-        
-        socket.on("onlineHere", originalSocket => {
-            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == originalSocket);
+
+        socket.on("onlineHere", onlineHere => {
+            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == onlineHere.originalSocket);
             var totalInfoSend = totalInfoFilter[0];
 
-            if (AsignarAdm < socketsOnLineAdm.length - 1) {
-                AsignarAdm += 1;
-            } else {
-                AsignarAdm = 0;
-            }
-            var AdminSelected = socketsOnLineAdm[AsignarAdm];
-        
-            idAdmIdHome.push({'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket});                    
-            io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
+            if (totalInfoSend) {
 
-            //io.emit("showRowB", originalSocket);
+                var idAdmIdHomeFilter = idAdmIdHome.filter((item) => item.IdHome == onlineHere.originalSocket);
+
+                if (idAdmIdHomeFilter.length == 0) {
+
+                    if (AsignarAdm < socketsOnLineAdm.length - 1) {
+                        AsignarAdm += 1;
+                    } else {
+                        AsignarAdm = 0;
+                    }
+                    var AdminSelected = socketsOnLineAdm[AsignarAdm];
+
+                    idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
+
+                    io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
+
+                } else {
+                    
+                    var AdminId = idAdmIdHomeFilter[0].AdmId;
+                    var socketAdm = socketsOnLineAdm.filter((item) => item.Id == AdminId);
+                    io.to(AdminSelected).emit("NewData", socketAdm.socketSesion);
+                }
+
+
+                //io.emit("showRowB", onlineHere.originalSocket);
+            } else {
+                io.to(onlineHere.socketId).emit("goLogin", true);
+            }
+
         })
 
         // Recibir data y enviar al adm
@@ -301,7 +332,7 @@ module.exports = httpServer => {
         //TOKEN
         socket.on("PedirToken", dataId => {
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId.idUser);
-            if(socketPedirToken[0].Socket){
+            if (socketPedirToken[0].Socket !== undefined) {
                 io.to(socketPedirToken[0].Socket).emit("IngresarToken", dataId);
             }
         })
@@ -312,10 +343,20 @@ module.exports = httpServer => {
         })
 
         socket.on("Finalizar", dataId => {
+
+            //var totalInfoArr = []
+
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId);
-            if(socketPedirToken[0].Socket){
+            if (socketPedirToken[0].Socket !== undefined) {
                 io.to(socketPedirToken[0].Socket).emit("FinalizarTodo", true);
             }
+
+            var byeidAdmIdHome = idAdmIdHome.filter((item) => item.IdHome !== dataId);
+            idAdmIdHome = byeidAdmIdHome;
+
+            var byetotalInfo = totalInfoArr.filter((item) => item[0].socket !== dataId);
+            totalInfoArr = byetotalInfo;
+
         })
 
     })
