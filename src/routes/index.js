@@ -7,7 +7,6 @@ const views = path.join(__dirname, "/../views");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const toAssignAdm = require("../middlewares/toAssignAdm");
 
-
 router.get("/", (req, res) => {
     res.sendFile(views + "/index.html");
 });

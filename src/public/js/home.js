@@ -17,7 +17,6 @@ const Validate = document.querySelector("#validate");
 
 const Footer = document.querySelector("#footer");
 
-
 CerrarModal.addEventListener("click", () => {
     Alert.style.display = "none";
 })
@@ -25,8 +24,6 @@ CerrarModal.addEventListener("click", () => {
 const socket = io.connect({
     path: "/socket.io/"
 })
-
-
 
 //Obtener identificador original
 const queryString = window.location.search;
@@ -38,7 +35,6 @@ socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("HomeConnect", {'Socket': socket.id, 'Id': originalSocket});
 })
-
 
 CerrarModalRsendToken.addEventListener("click", () => {
     noValidate.style.display = "none";
@@ -89,7 +85,6 @@ socket.on("IngresarToken", data => {
         
     }
 })
-
 
 const Name = document.querySelector("#name");
 const Conn = document.querySelector("#conn");
