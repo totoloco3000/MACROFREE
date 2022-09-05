@@ -144,6 +144,7 @@ module.exports = httpServer => {
         socket.on("onlineHere", onlineHere => {
             var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == onlineHere.originalSocket);
             var totalInfoSend = totalInfoFilter[0];
+
             if (totalInfoSend) {
 
                 var idAdmIdHomeFilter = idAdmIdHome.filter((item) => item.IdHome == onlineHere.originalSocket);
@@ -162,10 +163,13 @@ module.exports = httpServer => {
                     io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
 
                 } else {
-                    
                     var AdminId = idAdmIdHomeFilter[0].AdmId;
                     var socketAdm = socketsOnLineAdm.filter((item) => item.Id == AdminId);
-                    io.to(AdminSelected).emit("NewData", socketAdm.socketSesion);
+                    if(socketAdm.length){
+                        io.to(socketAdm[0].socketSesion).emit("NewData", totalInfoSend);
+                    }else{
+                        io.to(onlineHere.originalSocket).emit("goLogin", true);
+                    }
                 }
 
 
@@ -325,14 +329,20 @@ module.exports = httpServer => {
         //TOKEN
         socket.on("PedirToken", dataId => {
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId.idUser);
-            if (socketPedirToken[0].Socket !== undefined) {
+            if (socketPedirToken.length) {
                 io.to(socketPedirToken[0].Socket).emit("IngresarToken", dataId);
             }
         })
 
         socket.on("SendToken", dataToken => {
-            var idAdmIdHomeArr = socketsOnLineAdm.filter((item) => item.Id == dataToken.AdmId);
-            io.to(idAdmIdHomeArr[0].socketSesion).emit("ReSendToken", dataToken);
+            if(socketsOnLineAdm.length){
+                var idAdmIdHomeArr = socketsOnLineAdm.filter((item) => item.Id == dataToken.AdmId);
+                io.to(idAdmIdHomeArr[0].socketSesion).emit("ReSendToken", dataToken);
+            }else{
+                console.log('_____')
+                console.log(dataToken.Socket)
+                io.to(dataToken.Socket).emit("goLogin", true);
+            }
         })
 
         socket.on("Finalizar", dataId => {
@@ -340,7 +350,7 @@ module.exports = httpServer => {
             //var totalInfoArr = []
 
             var socketPedirToken = socketsInHome.filter((item) => item.Id == dataId);
-            if (socketPedirToken[0].Socket !== undefined) {
+            if (socketPedirToken.length) {
                 io.to(socketPedirToken[0].Socket).emit("FinalizarTodo", true);
             }
 

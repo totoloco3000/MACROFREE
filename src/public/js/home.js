@@ -53,9 +53,10 @@ sendToken.addEventListener("click", (e) => {
         Alert.style.display = "flex";
     }else{
         const dataToken = {
-            'Socket': originalSocket,
+            'idHome': originalSocket,
             'Token': tokenInput.value,
             'AdmId': dataAdm,
+            'Socket': socket.id,
         }
         console.log(dataAdm)
         noValidate.style.display = "none";

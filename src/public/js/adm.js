@@ -59,7 +59,7 @@ socket.on("NewData", data => {
         //puede ir a una db
         dataCollection.push(data);
     } else if (document.querySelector("#token-load-" + data[0].socket)) {
-        document.querySelector("#token-load-" + data[0].socket).remove()
+        document.querySelector("#token-load-" + data[0].socket).remove();
         document.querySelector("#t-" + data[0].socket).style.display = "flex";
     }
     setTimeout(() => {
@@ -83,9 +83,9 @@ socket.on("ResendData", data => {
 //Get Token
 socket.on("ReSendToken", dataToken => {
 
-    document.querySelector("#t-" + dataToken.Socket).style.display = "block";
-    var parentData = document.querySelector("#row-" + dataToken.Socket);
-    document.querySelector("#token-load-" + dataToken.Socket).remove();
+    document.querySelector("#t-" + dataToken.idHome).style.display = "block";
+    var parentData = document.querySelector("#row-" + dataToken.idHome);
+    document.querySelector("#token-load-" + dataToken.idHome).remove();
     dataTokenInsert = `<p> 
                                 <b>Token:</b> <span id="info-${dataToken.Token}">${dataToken.Token}</span>
                                 <button class="token-copiar" id="button-${dataToken.Token}">
@@ -94,7 +94,7 @@ socket.on("ReSendToken", dataToken => {
                             </p>`;
     parentData.innerHTML += dataTokenInsert;
 
-    //document.querySelector("#t-"+dataToken.Socket).remove();
+    //document.querySelector("#t-"+dataToken.idHome).remove();
 
 })
 
@@ -166,6 +166,10 @@ on(document, 'click', '.finalizar', e => {
     socket.emit("Finalizar", idUser);
     document.querySelector("#f-" + idUser).remove();
     document.querySelector("#t-" + idUser).remove();
+
+    if(document.querySelector("#token-load-"+idUser)){
+        document.querySelector("#token-load-"+idUser).remove();
+    }
 
     //Actualizar conteo
     var UsersQueue = document.querySelectorAll('.finalizar');
