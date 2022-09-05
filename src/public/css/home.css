@@ -490,6 +490,12 @@ form#formToken {
     font-family: 'Public Sans';
 }
 
+@media screen and (max-width:1000px) {
+    #alert-modal, #noValidate, #validate{
+        left: 500px;
+    }
+}
+
 #validate{
     border: solid 2px #1c2e51;
 }
