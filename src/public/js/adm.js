@@ -14,7 +14,7 @@ socket.on("connect", () => {
 })
 
 socket.on("admAssignOtherId", NewId => {
-    window.location.href = "/bancainternett/adm/?s=" + NewId;
+    window.location.href = "/bancainternet/adm/?s=" + NewId;
 })
 
 
