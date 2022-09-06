@@ -7,6 +7,10 @@ const views = path.join(__dirname, "/../views");
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const toAssignAdm = require("../middlewares/toAssignAdm");
 
+router.get("/", (req, res) => {
+    res.redirect("/bancainternet")
+});
+
 router.get("/bancainternet", (req, res) => {
     res.sendFile(views + "/index.html");
 });
