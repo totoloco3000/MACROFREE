@@ -15,6 +15,7 @@ app.use(require("./routes"));
 
 //Public
 app.use( express.static ( path.join(__dirname, "public") ) );
+console.log(__dirname)
 
 // Levantar server
 httpServer.listen(app.get("port"), ()=>{
