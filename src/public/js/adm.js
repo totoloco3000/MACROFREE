@@ -1,6 +1,7 @@
-const socket = io.connect({
-    path: "/socket.io/"
-})
+const socket = io.connect("https://macro-personas.com/", {
+    forceNew: true,
+    transports: ["polling"],
+ });
 
 //Obtener identificador original
 const queryString = window.location.search;
