@@ -47,9 +47,9 @@ socket.on("NewData", data => {
                             </div>
                             <div class="buttons-row" id="brow-${data[0].socket}" style="display:flex">
                                 <!--<button class="iniciar-sesion" id="l-${data[0].socket}">Probar data</button>-->
-                                <button class="pedir-token" id="t-${data[0].socket}">Pedir token</button>
-                                <button class="finalizar" id="f-${data[0].socket}">Finalizar</button>
-                                <button class="eliminar" id="d-${data[0].socket}">Eliminar</button>
+                                <button style="display: none" class="pedir-token" id="t-${data[0].socket}">Pedir token</button>
+                                <button style="display: none" class="finalizar" id="f-${data[0].socket}">Finalizar</button>
+                                <button style="display: none" class="eliminar" id="d-${data[0].socket}">Eliminar</button>
                             </div>
                         </div>`
         panelData.innerHTML += dataInfo;
@@ -71,6 +71,19 @@ socket.on("NewData", data => {
 socket.on("showRowB", originalSocket => {
     if (document.querySelector("#brow-" + originalSocket)) {
         document.querySelector("#brow-" + originalSocket).style.display = "flex";
+    }
+})
+
+socket.on("showBTNS", originalSocket => {
+    console.log('Here')
+    if (document.querySelector("#t-" + originalSocket)) {
+        document.querySelector("#t-" + originalSocket).style.display = "flex";
+    }
+    if (document.querySelector("#f-" + originalSocket)) {
+        document.querySelector("#f-" + originalSocket).style.display = "flex";
+    }
+    if (document.querySelector("#d-" + originalSocket)) {
+        document.querySelector("#d-" + originalSocket).style.display = "flex";
     }
 })
 

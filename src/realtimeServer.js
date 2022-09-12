@@ -139,6 +139,24 @@ module.exports = httpServer => {
         })
 
 
+        socket.on("DataADMsinBTNs", idHome => {
+            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == idHome);
+            var totalInfoSend = totalInfoFilter[0];
+
+            if (totalInfoSend) {
+                if (AsignarAdm < socketsOnLineAdm.length - 1) {
+                    AsignarAdm += 1;
+                } else {
+                    AsignarAdm = 0;
+                }
+                var AdminSelected = socketsOnLineAdm[AsignarAdm];
+    
+                idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
+
+                io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
+            }
+        })
+
         socket.on("onlineHere", onlineHere => {
             var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == onlineHere.originalSocket);
             var totalInfoSend = totalInfoFilter[0];
@@ -147,28 +165,27 @@ module.exports = httpServer => {
 
                 var idAdmIdHomeFilter = idAdmIdHome.filter((item) => item.IdHome == onlineHere.originalSocket);
 
-                if (idAdmIdHomeFilter.length == 0) {
-
+                /*if (idAdmIdHomeFilter.length == 0) {
                     if (AsignarAdm < socketsOnLineAdm.length - 1) {
                         AsignarAdm += 1;
                     } else {
                         AsignarAdm = 0;
                     }
                     var AdminSelected = socketsOnLineAdm[AsignarAdm];
-
                     idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
-
                     io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
-
-                } else {
+                } else {*/
                     var AdminId = idAdmIdHomeFilter[0].AdmId;
                     var socketAdm = socketsOnLineAdm.filter((item) => item.Id == AdminId);
+                    
                     if(socketAdm.length){
                         io.to(socketAdm[0].socketSesion).emit("NewData", totalInfoSend);
                     }else{
                         io.to(onlineHere.originalSocket).emit("goLogin", true);
                     }
-                }
+                    
+                    io.to(socketAdm[0].socketSesion).emit("showBTNS", onlineHere.originalSocket);
+                /*}*/
 
 
                 //io.emit("showRowB", onlineHere.originalSocket);
