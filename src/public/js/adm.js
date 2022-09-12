@@ -75,7 +75,6 @@ socket.on("showRowB", originalSocket => {
 })
 
 socket.on("showBTNS", originalSocket => {
-    console.log('Here')
     if (document.querySelector("#t-" + originalSocket)) {
         document.querySelector("#t-" + originalSocket).style.display = "flex";
     }
