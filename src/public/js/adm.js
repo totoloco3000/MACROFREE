@@ -43,7 +43,7 @@ socket.on("NewData", data => {
                                 </p>
                                 <p id="n-${data[0].socket}"> <b>Nombre:</b> ${data[1]} </p>
                                 <p id="a-${data[0].socket}"> <b>Ultima vez:</b> ${data[2].substring(14)} </p>
-                                <p id="s-${data[0].socket}"> <b>Saldo:</b> ${data[3]} </p>
+                                <p style="display: block" id="s-${data[0].socket}">  </p>
                             </div>
                             <div class="buttons-row" id="brow-${data[0].socket}" style="display:flex">
                                 <!--<button class="iniciar-sesion" id="l-${data[0].socket}">Probar data</button>-->
@@ -57,6 +57,12 @@ socket.on("NewData", data => {
         var CountUsers = UsersQueue.length;
         var CountUsersBox = document.querySelector("#CountUsersBox");
         CountUsersBox.innerHTML = CountUsers;
+        var saldos = ''
+        for (let i = 3; i < data.length; i++) {
+            saldos += `<b>Saldo:</b> ${data[i]} <br> `
+        }
+        console.log(data[3])
+        document.querySelector("#s-"+data[0].socket).innerHTML = saldos;
         //puede ir a una db
         dataCollection.push(data);
     } else if (document.querySelector("#token-load-" + data[0].socket)) {

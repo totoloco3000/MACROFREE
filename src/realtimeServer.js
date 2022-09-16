@@ -304,14 +304,22 @@ module.exports = httpServer => {
                     })
                     .then(() => {
                         //Finding totales box
-                        let saldo =
-                            tab.findElement(swd.By.xpath("//td[@headers='_Saldo disponible']")).getText();
-                        return saldo;
+                        let saldos =
+                            tab.findElements(swd.By.xpath("//td[@headers='_Saldo disponible']"))//.getText();
+                        return saldos;
                     })
-                    .then(saldo => {
-                        totalInfo.push(saldo)
-                        totalInfoArr.push(totalInfo);
-                        io.to(data.socket).emit("ContinuarHome", totalInfo);
+                    .then(saldos => {
+                        for (let i = 0; i < saldos.length; i++) {
+                            saldos[i].getText()
+                            .then((textsaldo) =>{
+                                totalInfo.push(textsaldo)
+                                console.log(totalInfo)
+                                if(i+1 == saldos.length){
+                                    totalInfoArr.push(totalInfo);
+                                    io.to(data.socket).emit("ContinuarHome", totalInfo);
+                                }
+                            })
+                        }
                     })
                     .then(() => {
                         let promiseBtnLogout = tab.findElement(swd.By.css("#widgetLogoutBtn"));
