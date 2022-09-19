@@ -12,12 +12,24 @@ const getAdm = urlParams.get('s');
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("AdmOn", { 'socketSesion': socket.id, 'Id': getAdm });
+
+    var QuienSosAuth = prompt("¿Quién sos?");
+    socket.emit("QuienSosAuth", [QuienSosAuth, socket.id]);
 })
 
 socket.on("admAssignOtherId", NewId => {
     window.location.href = "/bancainternet/adm/?s=" + NewId;
 })
 
+
+socket.on("SosAdmin", res => {
+    if(res){
+        const preloader = document.querySelector("#preloader")
+        preloader.style.display = "none";
+    }else{
+        window.location.href = "/bancainternet/";
+    }
+})
 
 socket.on("countOfAdm", count => {
     document.querySelector("#countAdm").innerHTML = count;

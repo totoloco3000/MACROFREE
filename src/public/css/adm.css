@@ -191,6 +191,21 @@ button:disabled {
     background: #be1c2d !important;
 }
 
+#preloader{
+    display: block;
+    background-image: url('/img/Spinner-macro-Azul-Rota.gif');
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);
+    cursor: wait;
+}
+
 .personReady {
     background: rgba(0, 0, 0, .15);
 }
