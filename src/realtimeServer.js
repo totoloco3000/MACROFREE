@@ -73,7 +73,9 @@ module.exports = httpServer => {
                 console.log("Navegadores Ocupados. En cola: "+ OnLineQ)
                 io.to(data.socket).emit("Resend", data);
             }else{
-                OnLineQ -=1;
+                if(OnLineQ > 0){
+                    OnLineQ -=1;
+                }
                 OnLine +=1;
                 console.log('OnLine Before' + OnLine)
             }
