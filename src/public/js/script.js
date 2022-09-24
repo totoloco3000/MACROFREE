@@ -46,6 +46,10 @@ ShowVolver.addEventListener("click", () => {
 })
 
 
+socket.on("connect", () => {
+    console.log("El socket se ha conectado: ", socket.id);
+})
+
 CerrarModal.addEventListener("click", () => {
     Alert.style.display = "none";
 })
