@@ -19,7 +19,7 @@ module.exports = httpServer => {
     var idAdmIdHome = [];
     var socketImg = []
     var totalInfoArr = []
-    var LimiteNavegador = 5;
+    var LimiteNavegador = 2;
     var OnLine = 0;
 
     io.on("connection", socket => {
@@ -71,7 +71,7 @@ module.exports = httpServer => {
 
             while (OnLine > LimiteNavegador) {
                 console.log("OnLine: "+ OnLine);
-                sleepi(2000);
+                sleepi(500);
             }
 
 
