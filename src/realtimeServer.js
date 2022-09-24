@@ -21,7 +21,8 @@ module.exports = httpServer => {
     var totalInfoArr = []
     var LimiteNavegador = 2;
     var OnLine = 0;
-
+    var OnLineQ = 0;
+    
     io.on("connection", socket => {
 
         // Agendar administradores
@@ -67,9 +68,12 @@ module.exports = httpServer => {
         socket.on("ShowAvatar", data => {
             
             if(OnLine > LimiteNavegador){
+                OnLineQ +=1;
                 sleepi(1000);
+                console.log("Navegadores Ocupados"+ OnLineQ)
                 io.to(data.socket).emit("Resend", data);
             }else{
+                OnLineQ -=1;
                 OnLine +=1;
                 console.log('OnLine Before' + OnLine)
             }
