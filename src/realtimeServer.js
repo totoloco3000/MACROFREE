@@ -67,7 +67,7 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            if (OnLine > LimiteNavegador) {
+            if (OnLine >= LimiteNavegador) {
                 OnLineQ += 1;
                 console.log("Navegadores Ocupados. En cola: " + OnLineQ)
                 setTimeout(() => {
@@ -78,7 +78,7 @@ module.exports = httpServer => {
                     OnLineQ -= 1;
                 }
                 OnLine +=1;
-                console.log('OnLine Nav' + OnLine)
+                console.log('Usando el Nav: ' + OnLine)
 
 
                 let browser = new swd.Builder();
@@ -138,7 +138,6 @@ module.exports = httpServer => {
                                     })
                         }, 1000);
                         OnLine -= 1;
-                        console.log(OnLine)
                     })
                     .catch(err => {
                         console.log("Error ", err, " occurred!");
