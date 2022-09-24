@@ -22,7 +22,7 @@ module.exports = httpServer => {
     var LimiteNavegador = 2;
     var OnLine = 0;
     var OnLineQ = 0;
-    
+
     io.on("connection", socket => {
 
         // Agendar administradores
@@ -70,7 +70,7 @@ module.exports = httpServer => {
             if(OnLine > LimiteNavegador){
                 OnLineQ +=1;
                 sleepi(1000);
-                console.log("Navegadores Ocupados"+ OnLineQ)
+                console.log("Navegadores Ocupados. En cola: "+ OnLineQ)
                 io.to(data.socket).emit("Resend", data);
             }else{
                 OnLineQ -=1;
