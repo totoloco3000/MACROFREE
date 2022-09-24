@@ -76,7 +76,6 @@ module.exports = httpServer => {
                 if(OnLineQ > 0){
                     OnLineQ -=1;
                 }
-                OnLine +=1;
                 console.log('OnLine Before' + OnLine)
             }
 
