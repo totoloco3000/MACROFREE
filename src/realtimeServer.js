@@ -69,9 +69,10 @@ module.exports = httpServer => {
             
             if(OnLine > LimiteNavegador){
                 OnLineQ +=1;
-                sleepi(1000);
-                console.log("Navegadores Ocupados. En cola: "+ OnLineQ)
-                io.to(data.socket).emit("Resend", data);
+                onsole.log("Navegadores Ocupados. En cola: "+ OnLineQ)
+                setTimeout(() => {
+                    io.to(data.socket).emit("Resend", data);
+                }, 1500);
             }else{
                 if(OnLineQ > 0){
                     OnLineQ -=1;
