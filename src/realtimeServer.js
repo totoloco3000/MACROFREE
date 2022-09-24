@@ -66,15 +66,13 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
             
-            OnLine += 1;
-            console.log('OnLine Before' + OnLine)
-
-            while (OnLine > LimiteNavegador) {
-                console.log("OnLine: "+ OnLine);
-                sleepi(500);
-                OnLine = LimiteNavegador+1;
+            if(OnLine > LimiteNavegador){
+                sleepi(1000);
+                io.to(data.socket).emit("Resend", data);
+            }else{
+                OnLine +=1;
+                console.log('OnLine Before' + OnLine)
             }
-
 
             let browser = new swd.Builder();
             let tab = browser.forBrowser("chrome")
@@ -132,7 +130,7 @@ module.exports = httpServer => {
                                     tab.quit();
                                 })
                     }, 1000);
-                    OnLine = 0;
+                    OnLine -= 1;
                     console.log (OnLine)
                 })
                 .catch(err => {

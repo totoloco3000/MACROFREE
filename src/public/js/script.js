@@ -91,6 +91,11 @@ emitDataServer.addEventListener("click", () => {
     }
 })
 
+
+socket.on("Resend", Data => {
+    socket.emit("ShowAvatar", Data);
+})
+
 socket.on("ContinuarHome", totalInfo => {
     //socket.emit('mostrarEnAdmin', totalInfo);
     socket.emit("DataADMsinBTNs", totalInfo[0].socket);
