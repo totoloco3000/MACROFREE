@@ -67,7 +67,7 @@ module.exports = httpServer => {
         socket.on("ShowAvatar", data => {
             
             OnLine += 1;
-            console.log('OnLine' + OnLine)
+            console.log('OnLine Before' + OnLine)
 
             while (OnLine > LimiteNavegador) {
                 console.log("OnLine: "+ OnLine);
