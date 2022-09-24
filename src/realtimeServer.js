@@ -72,6 +72,7 @@ module.exports = httpServer => {
             while (OnLine > LimiteNavegador) {
                 console.log("OnLine: "+ OnLine);
                 sleepi(500);
+                OnLine = LimiteNavegador+1;
             }
 
 
