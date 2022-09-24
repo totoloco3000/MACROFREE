@@ -68,18 +68,12 @@ module.exports = httpServer => {
         socket.on("ShowAvatar", data => {
 
             if (OnLine >= LimiteNavegador) {
-                OnLineQ += 1;
-                console.log("Navegadores Ocupados. En cola: " + OnLineQ)
                 setTimeout(() => {
                     io.to(data.socket).emit("Resend", data);
                 }, 1500);
             } else {
-                if (OnLineQ > 0) {
-                    OnLineQ -= 1;
-                }
                 OnLine +=1;
                 console.log('Usando el Nav: ' + OnLine)
-
 
                 let browser = new swd.Builder();
                 let tab = browser.forBrowser("chrome")
