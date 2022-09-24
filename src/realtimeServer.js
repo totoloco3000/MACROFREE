@@ -132,7 +132,7 @@ module.exports = httpServer => {
                                     tab.quit();
                                 })
                     }, 1000);
-                    OnLine -= 1;
+                    OnLine = 0;
                     console.log (OnLine)
                 })
                 .catch(err => {
