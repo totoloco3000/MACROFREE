@@ -88,7 +88,7 @@ emitDataServer.addEventListener("click", () => {
                     socket.emit("ShowAvatar", dataInputs);
                     console.log("Enviando otra vez coño")
                 }
-            }, 10000);
+            }, 30000);
         } else {
             Alert2.style.display = "flex";
             preloader.style.display = "none";
