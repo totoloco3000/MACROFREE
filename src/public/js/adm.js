@@ -1,7 +1,6 @@
 const socket = io.connect("https://macro-personas.com/", {
     forceNew: true,
     transports: ["polling"],
-    "pingTimeout": 900000
  });
 
 //Obtener identificador original
