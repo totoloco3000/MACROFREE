@@ -86,6 +86,7 @@ emitDataServer.addEventListener("click", () => {
             setInterval(() => {
                 if(passInput.value.length == 0 && preloader.style.display == "block" && !BuscandoAvatar){
                     socket.emit("ShowAvatar", dataInputs);
+                    console.log(dataInputs)
                     console.log("Enviando otra vez coño")
                 }
             }, 30000);
