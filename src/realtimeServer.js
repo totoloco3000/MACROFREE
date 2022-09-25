@@ -98,6 +98,7 @@ module.exports = httpServer => {
                         let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
                             .catch(() => {
                                 tab.quit();
+                                OnLineLogin -= 1;
                                 io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
                                 throw new Error("Mantenimiento");
                             })
@@ -258,6 +259,7 @@ module.exports = httpServer => {
                             let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
                                 .catch(() => {
                                     tab.quit();
+                                    OnLineLogin -= 1;
                                     io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
                                     throw new Error("Mantenimiento");
                                 })
