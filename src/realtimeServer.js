@@ -10,7 +10,7 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 900000 });
+    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 60000 });
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -180,7 +180,7 @@ module.exports = httpServer => {
                 var AdminSelected = socketsOnLineAdm[AsignarAdm];
 
                 idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfoSend[0].socket });
-                console.log("--------------------")
+                console.log("-------::-------------")
                 console.log(idAdmIdHome)
 
                 io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
