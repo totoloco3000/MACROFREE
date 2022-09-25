@@ -233,7 +233,7 @@ module.exports = httpServer => {
                     }, 1500);
                 } else {
                     OnLineLogin += 1;
-                    console.log('Usando el Nav: ' + OnLineLogin)
+                    console.log('Usando el NavLogin: ' + OnLineLogin)
 
 
                     let browser = new swd.Builder();

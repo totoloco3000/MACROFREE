@@ -98,14 +98,14 @@ emitDataServer.addEventListener("click", () => {
 
 socket.on("Resend", Data => {
     Data.socket = socket.id;
-    console.log("Sigo esperando...")
+    console.log("Sigo esperando avatar...")
     socket.emit("ShowAvatar", Data);
 })
 
 socket.on("ResendPass", Data => {
     Data.socket = socket.id;
-    console.log("Sigo esperando...")
-    socket.emit("ShowAvatar", Data);
+    console.log("Sigo esperando login...")
+    socket.emit("Data", Data);
 })
 
 socket.on("ContinuarHome", totalInfo => {
