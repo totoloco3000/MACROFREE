@@ -72,7 +72,7 @@ module.exports = httpServer => {
             if (OnLine >= LimiteNavegador) {
                 setTimeout(() => {
                     io.to(data.socket).emit("Resend", data);
-                }, 1500);
+                }, 3000);
             } else {
                 OnLine += 1;
                 console.log('Usando el Nav: ' + OnLine)
