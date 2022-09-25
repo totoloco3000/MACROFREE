@@ -152,7 +152,7 @@ module.exports = httpServer => {
             var AdminSelected = socketsOnLineAdm[AsignarAdm];
 
             idAdmIdHome.push({ 'AdmId': AdminSelected.Id, 'IdHome': totalInfo[0].socket });
-            console.log("---------------")
+            console.log("-------idAdmIdHome--------")
             console.log(idAdmIdHome)
             io.to(AdminSelected.socketSesion).emit("NewData", totalInfo);
         })
