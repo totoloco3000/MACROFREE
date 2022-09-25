@@ -11,7 +11,6 @@ module.exports = httpServer => {
 
     const { Server } = require("socket.io");
     const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 900000 });
-    const ioAdm = new Server(httpServer);
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -23,7 +22,8 @@ module.exports = httpServer => {
     var OnLine = 0;
     var OnLineLogin = 0;
 
-    ioAdm.on("connection", socket => {
+    io.on("connection", socket => {
+
         // Agendar administradores
         socket.on("AdmOn", data => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.Id == data.Id);
@@ -31,9 +31,9 @@ module.exports = httpServer => {
                 console.log('-----------Adm')
                 socketsOnLineAdm.push(data);
                 console.log(socketsOnLineAdm)
-                ioAdm.emit("countOfAdm", socketsOnLineAdm.length);
+                io.emit("countOfAdm", socketsOnLineAdm.length);
             } else {
-                ioAdm.to(data.socketSesion).emit("admAssignOtherId", Math.random());
+                io.to(data.socketSesion).emit("admAssignOtherId", Math.random());
             }
 
         });
@@ -42,15 +42,12 @@ module.exports = httpServer => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.socketSesion !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;
             if (newsocketsOnLineAdm.length != socketsOnLineAdm) {
-                ioAdm.emit("countOfAdm", socketsOnLineAdm.length);
+                io.emit("countOfAdm", socketsOnLineAdm.length);
             }
 
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
             socketsInHome = newsocketsInHome;
         })
-    })
-
-    io.on("connection", socket => {
 
         // Agendar Home para pedir cosas
         socket.on("HomeConnect", data => {
