@@ -188,7 +188,8 @@ module.exports = httpServer => {
             if (totalInfoSend) {
 
                 var idAdmIdHomeFilter = idAdmIdHome.filter((item) => item.IdHome == onlineHere.originalSocket);
-
+                console.log('----------')
+                console.log(idAdmIdHomeFilter)
                 /*if (idAdmIdHomeFilter.length == 0) {
                     if (AsignarAdm < socketsOnLineAdm.length - 1) {
                         AsignarAdm += 1;
