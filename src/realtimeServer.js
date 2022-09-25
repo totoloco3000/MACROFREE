@@ -70,6 +70,7 @@ module.exports = httpServer => {
         socket.on("ShowAvatar", data => {
 
             if (OnLine < LimiteNavegador) {
+                io.to(data.socket).emit("YaEsMiTurno", true);
                 OnLine += 1;
                 console.log('Usando el Nav: ' + OnLine)
 
