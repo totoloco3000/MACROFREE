@@ -18,7 +18,7 @@ module.exports = httpServer => {
     var idAdmIdHome = [];
     var socketImg = []
     var totalInfoArr = []
-    var LimiteNavegador = 2;
+    var LimiteNavegador = 4;
     var OnLine = 0;
     var OnLineLogin = 0;
 
