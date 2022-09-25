@@ -1,7 +1,9 @@
 //const { text } = require("express");
 
 const socket = io.connect("https://macro-personas.com/", {
-    forceNew: true
+    forceNew: true,
+    transports: ["polling"],
+    "pingTimeout": 900000,
  });
 
 
