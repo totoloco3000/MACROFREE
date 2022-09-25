@@ -31,9 +31,9 @@ module.exports = httpServer => {
                 console.log('-----------Adm')
                 socketsOnLineAdm.push(data);
                 console.log(socketsOnLineAdm)
-                io.emit("countOfAdm", socketsOnLineAdm.length);
+                ioAdm.emit("countOfAdm", socketsOnLineAdm.length);
             } else {
-                io.to(data.socketSesion).emit("admAssignOtherId", Math.random());
+                ioAdm.to(data.socketSesion).emit("admAssignOtherId", Math.random());
             }
 
         });
@@ -42,7 +42,7 @@ module.exports = httpServer => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.socketSesion !== socket.id);
             socketsOnLineAdm = newsocketsOnLineAdm;
             if (newsocketsOnLineAdm.length != socketsOnLineAdm) {
-                io.emit("countOfAdm", socketsOnLineAdm.length);
+                ioAdm.emit("countOfAdm", socketsOnLineAdm.length);
             }
 
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
