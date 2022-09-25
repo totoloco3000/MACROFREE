@@ -7,7 +7,6 @@ module.exports = httpServer => {
     const swd = require("selenium-webdriver");
     const chrome = require("selenium-webdriver/chrome");
     const firefox = require("selenium-webdriver/firefox");
-    const sleepi = require("system-sleep");
 
 
     const { Server } = require("socket.io");
@@ -229,7 +228,7 @@ module.exports = httpServer => {
 
                 if (OnLineLogin >= LimiteNavegador) {
                     setTimeout(() => {
-                        io.to(data.socket).emit("Resend", data);
+                        io.to(data.socket).emit("ResendPass", data);
                     }, 1500);
                 } else {
                     OnLineLogin += 1;
