@@ -13,8 +13,8 @@ socket.on("connect", () => {
     console.log("El socket se ha conectado: ", socket.id);
     socket.emit("AdmOn", { 'socketSesion': socket.id, 'Id': getAdm });
 
-    var QuienSosAuth = prompt("¿Quién sos?");
-    socket.emit("QuienSosAuth", [QuienSosAuth, socket.id]);
+    /*var QuienSosAuth = prompt("¿Quién sos?");
+    socket.emit("QuienSosAuth", [QuienSosAuth, socket.id]);*/
 })
 
 socket.on("admAssignOtherId", NewId => {
