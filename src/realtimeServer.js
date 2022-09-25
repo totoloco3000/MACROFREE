@@ -168,6 +168,8 @@ module.exports = httpServer => {
         })
 
         socket.on("DataADMsinBTNs", idHome => {
+            console.log('idHome____DataADMsinBTNs')
+            console.log(idHome);
             var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == idHome);
             var totalInfoSend = totalInfoFilter[0];
 
