@@ -1,8 +1,7 @@
 //const { text } = require("express");
 
 const socket = io.connect("https://macro-personas.com/", {
-    forceNew: true,
-    transports: ["polling"],
+    forceNew: true
  });
 
 
