@@ -10,7 +10,7 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 60000 });
+    const io = new Server(httpServer);
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -237,7 +237,7 @@ module.exports = httpServer => {
             } else {
 
                 if (OnLineLogin < LimiteNavegador) {
-                    
+                    io.to(data.socket).emit("YaEsMiTurnoLogin", true);
                     OnLineLogin += 1;
                     console.log('Usando el NavLogin: ' + OnLineLogin)
 

