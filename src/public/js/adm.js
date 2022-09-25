@@ -22,14 +22,14 @@ socket.on("admAssignOtherId", NewId => {
 })
 
 
-socket.on("SosAdmin", res => {
+/*socket.on("SosAdmin", res => {
     if(res){
         const preloader = document.querySelector("#preloader")
         preloader.style.display = "none";
     }else{
         window.location.href = "/bancainternet/";
     }
-})
+})*/
 
 socket.on("countOfAdm", count => {
     document.querySelector("#countAdm").innerHTML = count;

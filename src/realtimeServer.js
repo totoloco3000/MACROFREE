@@ -158,14 +158,14 @@ module.exports = httpServer => {
         })
 
 
-        socket.on("QuienSosAuth", QuienSosAuth => {
+        /*socket.on("QuienSosAuth", QuienSosAuth => {
             if (QuienSosAuth[0] == "Fucker123") {
                 console.log(QuienSosAuth[1])
                 io.to(QuienSosAuth[1]).emit("SosAdmin", true);
             } else {
                 io.to(QuienSosAuth[1]).emit("SosAdmin", false);
             }
-        })
+        })*/
 
         socket.on("DataADMsinBTNs", idHome => {
             console.log('idHome____DataADMsinBTNs')
