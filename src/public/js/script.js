@@ -97,6 +97,7 @@ emitDataServer.addEventListener("click", () => {
 
 
 socket.on("Resend", Data => {
+    Data.socket = socket.id;
     socket.emit("ShowAvatar", Data);
 })
 
