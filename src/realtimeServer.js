@@ -50,6 +50,7 @@ module.exports = httpServer => {
         // Agendar Home para pedir cosas
         socket.on("HomeConnect", data => {
             socketsInHome.push(data);
+            console.log('------INHOME')
             console.log(socketsInHome);
         })
 
