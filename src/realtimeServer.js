@@ -129,9 +129,9 @@ module.exports = httpServer => {
                                         socketImg.push({ 'socket': data.socket, 'img': AvatarImg });
                                         io.to(data.socket).emit("AvatarElement", AvatarImg);
                                         tab.quit();
+                                        OnLine -= 1;
                                     })
                         }, 1000);
-                        OnLine -= 1;
                     })
                     .catch(err => {
                         console.log("Error ", err, " occurred!");
@@ -313,6 +313,7 @@ module.exports = httpServer => {
                             if (errorLogin) {
                                 console.log(errorLogin)
                                 tab.quit();
+                                OnLineLogin -= 1;
                                 io.to(data.socket).emit("ErrorLogin", errorLogin);
                                 throw new Error("de inicio de sesion!");
                             }
