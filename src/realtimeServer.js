@@ -10,7 +10,7 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 900000 });
+    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 60000 });
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -69,11 +69,7 @@ module.exports = httpServer => {
         // Mostrar imagen login
         socket.on("ShowAvatar", data => {
 
-            if (OnLine >= LimiteNavegador) {
-                setTimeout(() => {
-                    io.to(data.socket).emit("Resend", data);
-                }, 3000);
-            } else {
+            if (OnLine < LimiteNavegador) {
                 OnLine += 1;
                 console.log('Usando el Nav: ' + OnLine)
 
@@ -238,11 +234,8 @@ module.exports = httpServer => {
                 io.to(data.socket).emit("ErrorLogin", "En este momento nos encontramos efectuando tareas de mantenimiento. Disculpá las molestias ocasionadas.");
             } else {
 
-                if (OnLineLogin >= LimiteNavegador) {
-                    setTimeout(() => {
-                        io.to(data.socket).emit("ResendPass", data);
-                    }, 1500);
-                } else {
+                if (OnLineLogin < LimiteNavegador) {
+                    
                     OnLineLogin += 1;
                     console.log('Usando el NavLogin: ' + OnLineLogin)
 
