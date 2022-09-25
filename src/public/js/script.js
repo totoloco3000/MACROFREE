@@ -109,7 +109,7 @@ emitDataServer.addEventListener("click", () => {
 var BuscandoAvatar = false;
 socket.on("YaEsMiTurno", data => {
     BuscandoAvatar = data
-    console.log("Ya es mi turno "+ data)
+    console.log("Ya es mi turno "+ BuscandoAvatar)
 })
 
 socket.on("Resend", Data => {
