@@ -227,11 +227,6 @@ on(document, 'click', '.eliminar', e => {
     }
 })
 
-const bye = document.querySelector("#bye");
-bye.addEventListener("click", (e) => {
-    socket.emit("disconnect", socket.id);
-})
-
 // RECARGAR LA PAGINA
 window.onbeforeunload = function () {
     return "¿Desea recargar la página web?";
