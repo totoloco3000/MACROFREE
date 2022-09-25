@@ -28,6 +28,8 @@ module.exports = httpServer => {
         socket.on("AdmOn", data => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.Id == data.Id);
             if (newsocketsOnLineAdm.length == 0) {
+                console.log('-----------Adm')
+                console.log(socketsOnLineAdm)
                 socketsOnLineAdm.push(data);
                 io.emit("countOfAdm", socketsOnLineAdm.length);
             } else {
