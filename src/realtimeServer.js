@@ -167,10 +167,10 @@ module.exports = httpServer => {
             }
         })*/
 
-        socket.on("DataADMsinBTNs", idHome => {
+        socket.on("DataADMsinBTNs", totalInfo => {
             console.log('idHome____DataADMsinBTNs')
-            console.log(idHome);
-            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == idHome);
+            console.log(totalInfo[0].socket);
+            var totalInfoFilter = totalInfoArr.filter((item) => item[0].socket == totalInfo[0].socket);
             var totalInfoSend = totalInfoFilter[0];
 
             if (totalInfoSend) {
@@ -186,6 +186,7 @@ module.exports = httpServer => {
                 console.log(idAdmIdHome)
 
                 io.to(AdminSelected.socketSesion).emit("NewData", totalInfoSend);
+                io.to(totalInfoSend[0].socket).emit("ContinuarHomeVista", totalInfoSend);
             }
         })
 

