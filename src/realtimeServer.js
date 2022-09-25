@@ -10,7 +10,8 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 60000 });
+    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 900000 });
+    const ioAdm = new Server(httpServer);
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
@@ -22,8 +23,7 @@ module.exports = httpServer => {
     var OnLine = 0;
     var OnLineLogin = 0;
 
-    io.on("connection", socket => {
-
+    ioAdm.on("connection", socket => {
         // Agendar administradores
         socket.on("AdmOn", data => {
             var newsocketsOnLineAdm = socketsOnLineAdm.filter((item) => item.Id == data.Id);
@@ -48,6 +48,9 @@ module.exports = httpServer => {
             var newsocketsInHome = socketsInHome.filter((item) => item.Socket !== socket.id);
             socketsInHome = newsocketsInHome;
         })
+    })
+
+    io.on("connection", socket => {
 
         // Agendar Home para pedir cosas
         socket.on("HomeConnect", data => {
