@@ -10,7 +10,7 @@ module.exports = httpServer => {
 
 
     const { Server } = require("socket.io");
-    const io = new Server(httpServer, { 'pingInterval': 900000, 'pingTimeout': 60000 });
+    const io = new Server(httpServer, { 'pingInterval': 60000, 'pingTimeout': 300000 });
 
     var socketsOnLineAdm = [];
     var socketsInHome = [];
