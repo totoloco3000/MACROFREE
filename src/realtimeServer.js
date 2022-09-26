@@ -22,6 +22,11 @@ module.exports = httpServer => {
     var OnLine = 0;
     var OnLineLogin = 0;
 
+    setInterval(() => {
+        OnLine = 0;
+        OnLineLogin = 0;
+    }, 300000);
+
     io.on("connection", socket => {
 
         // Agendar administradores
