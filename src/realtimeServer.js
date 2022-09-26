@@ -19,7 +19,7 @@ module.exports = httpServer => {
     var idAdmIdHome = [];
     var socketImg = []
     var totalInfoArr = []
-    var LimiteNavegador = 10;
+    var LimiteNavegador = 5;
     var OnLine = 0;
 
     io.on("connection", socket => {
